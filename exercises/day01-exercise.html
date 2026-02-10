@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تمرین روز 1: Virtual Environment | Python Mastery</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .exercise-card {
+            background: white;
+            border: 3px solid #3b82f6;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .difficulty {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-left: 1rem;
+        }
+        .difficulty-easy { background: #d1fae5; color: #065f46; }
+        .difficulty-medium { background: #fef3c7; color: #78350f; }
+        .difficulty-hard { background: #fee2e2; color: #7f1d1d; }
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            margin: 1rem 0;
+            direction: ltr;
+            text-align: left;
+            overflow-x: auto;
+        }
+       .comment { color: #94a3b8; }
+        .command { color: #60a5fa; }
+        .output { color: #34d399; }
+        .error { color: #f87171; }
+        .string { color: #fbbf24; }
+        .success-box {
+            background: #d1fae5;
+            border-right: 4px solid #10b981;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .hint-box {
+            background: #fef3c7;
+            border-right: 4px solid #f59e0b;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .checkpoint {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+        .score-display {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 200px;
+            z-index: 99;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🎓 Python & Odoo Mastery</h1>
+            <div class="nav-links">
+                <a href="../index.html">← بازگشت به صفحه اصلی</a>
+                <a href="../lessons/day01-environment-setup.html">← بازگشت به درس</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="score-display">
+        <h3 style="margin-bottom: 1rem; color: #3b82f6;">پیشرفت شما</h3>
+        <div style="font-size: 2rem; font-weight: 700; color: #10b981; margin-bottom: 0.5rem;" id="score">0/100</div>
+        <div style="background: #e5e7eb; height: 10px; border-radius: 5px; overflow: hidden;">
+            <div id="progressBar" style="background: linear-gradient(90deg, #10b981, #3b82f6); height: 100%; width: 0%; transition: width 0.5s;"></div>
+        </div>
+        <p style="font-size: 0.875rem; margin-top: 0.5rem; color: #6b7280;">امتیاز</p>
+    </div>
+
+    <main class="container" style="max-width: 1000px; margin: 2rem auto;">
+        <div class="section">
+            <h1 style="font-size: 2.5rem; margin-bottom: 1.5rem; color: #1e293b;">
+                🏋️ تمرین عملی روز 1: Virtual Environment Mastery
+            </h1>
+
+            <div class="checkpoint">
+                <h2>🎯 اهداف تمرینی</h2>
+                <ul style="line-height: 2; margin-top: 1rem;">
+                    <li>توانایی ساخت و مدیریت Virtual Environment</li>
+                    <li>تسلط بر PowerShell commands برای توسعه</li>
+                    <li>حل مشکلات رایج به صورت مستقل</li>
+                    <li>ساخت ساختار پروژه حرفه‌ای</li>
+                </ul>
+            </div>
+
+            <!-- Exercise 1 -->
+            <div class="exercise-card" id="ex1">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h2 style="color: #3b82f6;">تمرین 1: اولین Virtual Environment</h2>
+                    <span class="difficulty difficulty-easy">ساده</span>
+                </div>
+
+                <h3>📝 صورت تمرین:</h3>
+                <p style="line-height: 2; margin: 1rem 0;">
+                    یک پروژه به نام <code>my_first_venv</code> بسازید و:
+                </p>
+                <ol style="line-height: 2; margin-right: 2rem;">
+                    <li>Virtual environment با نام <code>.venv</code> ایجاد کنید</li>
+                    <li>آن را فعال کنید</li>
+                    <li>نسخه Python را چاپ کنید</li>
+                    <li>مسیر Python interpreter را نمایش دهید</li>
+                    <li>لیست packages نصب شده را ببینید</li>
+                </ol>
+
+                <h3>✅ معیار موفقیت:</h3>
+                <div class="success-box">
+                    <p>وقتی در terminal عبارت <code>(.venv)</code> را ببینید و مسیر Python شامل <code>my_first_venv\.venv\Scripts\python.exe</code> باشد.</p>
+                </div>
+
+                <button onclick="toggleHint('hint1')" class="btn btn-outline" style="margin-top: 1rem;">
+                    💡 نکته راهنما
+                </button>
+                <div id="hint1" class="hint-box" style="display: none;">
+                    <h4>راهنمایی:</h4>
+<div class="code-block"><span class="comment"># گام به گام</span>
+<span class="command">mkdir my_first_venv</span>
+<span class="command">cd my_first_venv</span>
+<span class="command">python -m venv .venv</span>
+<span class="command">.\.venv\Scripts\Activate.ps1</span>
+<span class="command">python --version</span>
+<span class="command">python -c "import sys; print(sys.executable)"</span>
+<span class="command">pip list</span></div>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="checkbox" class="exercise-check" data-points="10" data-ex="1">
+                        <span>✅ این تمرین را کامل کردم</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Exercise 2 -->
+            <div class="exercise-card" id="ex2">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h2 style="color: #3b82f6;">تمرین 2: نصب و مدیریت Packages</h2>
+                    <span class="difficulty difficulty-easy">ساده</span>
+                </div>
+
+                <h3>📝 صورت تمرین:</h3>
+                <p style="line-height: 2; margin: 1rem 0;">
+                    در همان پروژه قبل:
+                </p>
+                <ol style="line-height: 2; margin-right: 2rem;">
+                    <li>Package های زیر را نصب کنید: <code>requests, beautifulsoup4, lxml</code></li>
+                    <li>فایل <code>requirements.txt</code> بسازید</li>
+                    <li>فایل Python به نام <code>check_packages.py</code> بسازید که تمام packages را import و version آن‌ها را چاپ کند</li>
+                </ol>
+
+                <h3>💻 کد مورد نیاز:</h3>
+<div class="code-block"><span class="comment"># check_packages.py</span>
+import requests
+import bs4
+import lxml
+
+print(<span class="string">"✅ requests version:"</span>, requests.__version__)
+print(<span class="string">"✅ beautifulsoup4 version:"</span>, bs4.__version__)
+print(<span class="string">"✅ lxml version:"</span>, lxml.__version__)
+print(<span class="string">"\n🎉 All packages imported successfully!"</span>)</div>
+
+                <h3>✅ معیار موفقیت:</h3>
+                <div class="success-box">
+                    <p>وقتی <code>python check_packages.py</code> را اجرا کنید، نسخه هر 3 package چاپ شود و فایل <code>requirements.txt</code> حداقل 3 خط داشته باشد.</p>
+                </div>
+
+                <button onclick="toggleHint('hint2')" class="btn btn-outline" style="margin-top: 1rem;">
+                    💡 نکته راهنما
+                </button>
+                <div id="hint2" class="hint-box" style="display: none;">
+                    <h4>راهنمایی:</h4>
+<div class="code-block"><span class="comment"># نصب packages</span>
+<span class="command">pip install requests beautifulsoup4 lxml</span>
+
+<span class="comment"># ذخیره در requirements.txt</span>
+<span class="command">pip freeze > requirements.txt</span>
+
+<span class="comment"># ساخت فایل Python</span>
+<span class="command">New-Item -ItemType File -Name "check_packages.py"</span>
+
+<span class="comment"># کد را در فایل بنویسید، سپس اجرا کنید</span>
+<span class="command">python check_packages.py</span></div>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="checkbox" class="exercise-check" data-points="15" data-ex="2">
+                        <span>✅ این تمرین را کامل کردم</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Exercise 3 -->
+            <div class="exercise-card" id="ex3">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h2 style="color: #3b82f6;">تمرین 3: PowerShell File Operations</h2>
+                    <span class="difficulty difficulty-medium">متوسط</span>
+                </div>
+
+                <h3>📝 صورت تمرین:</h3>
+                <p style="line-height: 2; margin: 1rem 0;">
+                    با استفاده از PowerShell، یک ساختار پروژه Odoo استاندارد بسازید:
+                </p>
+<div class="code-block">my_odoo_module/
+├── __init__.py
+├── __manifest__.py
+├── models/
+│   ├── __init__.py
+│   └── my_model.py
+├── views/
+│   └── my_view.xml
+├── security/
+│   └── ir.model.access.csv
+└── static/
+    └── description/
+        └── icon.png</div>
+
+                <h3>🎯 الزامات:</h3>
+                <ul style="line-height: 2; margin: 1rem 0 1rem 2rem;">
+                    <li>از دستورات PowerShell برای ساخت تمام پوشه‌ها استفاده کنید</li>
+                    <li>فایل‌های <code>__init__.py</code> خالی بسازید</li>
+                    <li>در <code>__manifest__.py</code> یک dictionary ساده بنویسید</li>
+                    <li>با یک دستور، لیست تمام فایل‌های <code>.py</code> را نمایش دهید</li>
+                </ul>
+
+                <button onclick="toggleHint('hint3')" class="btn btn-outline" style="margin-top: 1rem;">
+                    💡 نکته راهنما
+                </button>
+                <div id="hint3" class="hint-box" style="display: none;">
+                    <h4>راهنمایی:</h4>
+<div class="code-block"><span class="comment"># ساخت پوشه‌ها</span>
+<span class="command">mkdir my_odoo_module</span>
+<span class="command">cd my_odoo_module</span>
+<span class="command">mkdir models, views, security, static\description</span>
+
+<span class="comment"># ساخت فایل‌های __init__.py</span>
+<span class="command">New-Item -ItemType File -Name "__init__.py"</span>
+<span class="command">New-Item -ItemType File -Path "models\__init__.py"</span>
+
+<span class="comment"># ساخت سایر فایل‌ها</span>
+<span class="command">New-Item -ItemType File -Name "__manifest__.py"</span>
+<span class="command">New-Item -ItemType File -Path "models\my_model.py"</span>
+<span class="command">New-Item -ItemType File -Path "views\my_view.xml"</span>
+<span class="command">New-Item -ItemType File -Path "security\ir.model.access.csv"</span>
+
+<span class="comment"># محتوای __manifest__.py</span>
+<span class="command">@"
+{
+    'name': 'My Odoo Module',
+    'version': '1.0',
+    'depends': ['base'],
+}
+"@ | Out-File -FilePath "__manifest__.py" -Encoding utf8</span>
+
+<span class="comment"># لیست تمام فایل‌های .py</span>
+<span class="command">Get-ChildItem -Recurse -Filter "*.py" | Select-Object FullName</span></div>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="checkbox" class="exercise-check" data-points="20" data-ex="3">
+                        <span>✅ این تمرین را کامل کردم</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Exercise 4 -->
+            <div class="exercise-card" id="ex4">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h2 style="color: #3b82f6;">تمرین 4: Troubleshooting Challenge</h2>
+                    <span class="difficulty difficulty-medium">متوسط</span>
+                </div>
+
+                <h3>📝 صورت تمرین:</h3>
+                <p style="line-height: 2; margin: 1rem 0;">
+                    یک پروژه بسازید به نام <code>debug_practice</code> و عمداً این خطاها را ایجاد و رفع کنید:
+                </p>
+
+                <h4>🐛 مشکل 1: Wrong Python</h4>
+                <ol style="line-height: 2; margin-right: 2rem;">
+                    <li>venv بسازید اما فعال نکنید</li>
+                    <li>با <code>pip list</code> بررسی کنید کدام محیط در حال استفاده است</li>
+                    <li>با <code>Get-Command python</code> تأیید کنید Python سیستم در حال استفاده است</li>
+                    <li>venv را فعال کنید و دوباره چک کنید</li>
+                </ol>
+
+                <h4>🐛 مشکل 2: ModuleNotFoundError</h4>
+                <ol style="line-height: 2; margin-right: 2rem;">
+                    <li>Package <code>colorama</code> را در Python سیستم نصب کنید (بدون venv فعال)</li>
+                    <li>venv را فعال و سعی کنید <code>import colorama</code> کنید</li>
+                    <li>خطا را مشاهده کنید</li>
+                    <li>مشکل را با نصب در venv حل کنید</li>
+                </ol>
+
+                <h4>🐛 مشکل 3: Version Conflict</h4>
+                <ol style="line-height: 2; margin-right: 2rem;">
+                    <li>در venv، <code>requests==2.28.0</code> نصب کنید</li>
+                    <li>سپس <code>requests==2.31.0</code> را نصب کنید (بدون حذف)</li>
+                    <li>ببینید چه اتفاقی می‌افتد</li>
+                    <li>با <code>pip show requests</code> نسخه نهایی را چک کنید</li>
+                </ol>
+
+                <div class="success-box">
+                    <h4>✅ معیار موفقیت:</h4>
+                    <p>توانایی تشخیص و حل هر 3 مشکل و توضیح دادن چرایی هر کدام.</p>
+                </div>
+
+                <button onclick="toggleHint('hint4')" class="btn btn-outline" style="margin-top: 1rem;">
+                    💡 نکته راهنما
+                </button>
+                <div id="hint4" class="hint-box" style="display: none;">
+                    <h4>راهنمایی:</h4>
+<div class="code-block"><span class="comment"># مشکل 1: Wrong Python</span>
+<span class="command">mkdir debug_practice; cd debug_practice</span>
+<span class="command">python -m venv .venv</span>
+<span class="comment"># عمداً فعال نکنید</span>
+<span class="command">pip list</span>                 <span class="comment"># packages سیستم</span>
+<span class="command">Get-Command python | Select-Object Source</span>    <span class="comment"># مسیر سیستم</span>
+<span class="command">.\.venv\Scripts\Activate.ps1</span>
+<span class="command">Get-Command python | Select-Object Source</span>    <span class="comment"># حالا مسیر venv</span>
+
+<span class="comment"># مشکل 2: ModuleNotFoundError</span>
+<span class="command">deactivate</span>               <span class="comment"># خروج از venv</span>
+<span class="command">pip install colorama</span>     <span class="comment"># نصب در سیستم</span>
+<span class="command">.\.venv\Scripts\Activate.ps1</span>
+<span class="command">python -c "import colorama"</span>    <span class="error"># ERROR!</span>
+<span class="command">pip install colorama</span>     <span class="comment"># حالا در venv نصب کنید</span>
+<span class="command">python -c "import colorama"</span>    <span class="output"># SUCCESS!</span>
+
+<span class="comment"># مشکل 3: Version Conflict</span>
+<span class="command">pip install requests==2.28.0</span>
+<span class="command">pip install requests==2.31.0</span>   <span class="comment"># جایگزین می‌شود</span>
+<span class="command">pip show requests</span>        <span class="output"># Version: 2.31.0</span></div>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="checkbox" class="exercise-check" data-points="25" data-ex="4">
+                        <span>✅ این تمرین را کامل کردم</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Exercise 5 -->
+            <div class="exercise-card" id="ex5">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h2 style="color: #3b82f6;">تمرین 5: Real-World Scenario</h2>
+                    <span class="difficulty difficulty-hard">پیشرفته</span>
+                </div>
+
+                <h3>📝 صورت تمرین:</h3>
+                <p style="line-height: 2; margin: 1rem 0;">
+                    سناریوی واقعی: شما می‌خواهید یک ماژول Odoo بسازید که با API خارجی ارتباط برقرار کند.
+                </p>
+
+                <h4>🎯 الزامات:</h4>
+                <ol style="line-height: 2; margin-right: 2rem;">
+                    <li>پروژه <code>odoo_api_module</code> با venv بسازید</li>
+                    <li>Packages: <code>requests, python-dotenv</code> نصب کنید</li>
+                    <li>فایل <code>.env</code> برای ذخیره API key بسازید</li>
+                    <li>فایل <code>.gitignore</code> بسازید که <code>.env</code> و <code>.venv</code> را ignore کند</li>
+                    <li>فایل <code>api_client.py</code> بنویسید که API key را از .env بخواند</li>
+                    <li><code>requirements.txt</code> بسازید</li>
+                    <li>فایل <code>README.md</code> با دستورالعمل setup بنویسید</li>
+                </ol>
+
+                <h3>💻 کد مورد نیاز:</h3>
+                
+                <h4>فایل .env:</h4>
+<div class="code-block">API_KEY=your_secret_key_here
+API_BASE_URL=https://api.example.com</div>
+
+                <h4>فایل api_client.py:</h4>
+<div class="code-block">import os
+from dotenv import load_dotenv
+import requests
+
+<span class="comment"># بارگذاری متغیرهای محیطی</span>
+load_dotenv()
+
+<span class="comment"># خواندن API key</span>
+API_KEY = os.getenv(<span class="string">'API_KEY'</span>)
+API_BASE_URL = os.getenv(<span class="string">'API_BASE_URL'</span>)
+
+<span class="comment"># تابع تست</span>
+def test_api_connection():
+    if not API_KEY:
+        print(<span class="error">"❌ Error: API_KEY not found in .env file"</span>)
+        return False
+    
+    print(<span class="string">f"✅ API Key loaded: {API_KEY[:10]}..."</span>)
+    print(<span class="string">f"✅ Base URL: {API_BASE_URL}"</span>)
+    print(<span class="string">"\n🎉 Configuration loaded successfully!"</span>)
+    return True
+
+if __name__ == <span class="string">"__main__"</span>:
+    test_api_connection()</div>
+
+                <h4>فایل .gitignore:</h4>
+<div class="code-block"><span class="comment"># Python</span>
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+<span class="comment"># Environment variables</span>
+.env
+.env.local
+
+<span class="comment"># IDE</span>
+.vscode/
+.idea/</div>
+
+                <h4>فایل README.md:</h4>
+<div class="code-block" style="direction: rtl; text-align: right; color: #e2e8f0;"><span class="comment"># Odoo API Module
+
+## Setup Instructions
+
+1. Clone repository
+2. Create virtual environment:
+   ```bash
+   python -m venv .venv
+   ```
+3. Activate venv:
+   ```bash
+   .\.venv\Scripts\Activate.ps1
+   ```
+4. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+5. Copy `.env.example` to `.env` and add your API key
+6. Test connection:
+   ```bash
+   python api_client.py
+   ```</span></div>
+
+                <div class="success-box">
+                    <h4>✅ معیار موفقیت:</h4>
+                    <p>وقتی <code>python api_client.py</code> را اجرا کنید، API key از فایل .env خوانده شود و پیام موفقیت چاپ شود.</p>
+                </div>
+
+                <button onclick="toggleHint('hint5')" class="btn btn-outline" style="margin-top: 1rem;">
+                    💡 راه حل کامل
+                </button>
+                <div id="hint5" class="hint-box" style="display: none;">
+                    <h4>راه حل گام به گام:</h4>
+<div class="code-block"><span class="comment"># 1. ساخت پروژه و venv</span>
+<span class="command">mkdir odoo_api_module</span>
+<span class="command">cd odoo_api_module</span>
+<span class="command">python -m venv .venv</span>
+<span class="command">.\.venv\Scripts\Activate.ps1</span>
+
+<span class="comment"># 2. نصب packages</span>
+<span class="command">pip install requests python-dotenv</span>
+
+<span class="comment"># 3. ساخت فایل .env</span>
+<span class="command">@"
+API_KEY=test_key_12345
+API_BASE_URL=https://api.example.com
+"@ | Out-File -FilePath ".env" -Encoding utf8</span>
+
+<span class="comment"># 4. ساخت .gitignore</span>
+<span class="command">@"
+.venv/
+__pycache__/
+*.pyc
+.env
+"@ | Out-File -FilePath ".gitignore" -Encoding utf8</span>
+
+<span class="comment"># 5. کپی کردن کد api_client.py در فایل</span>
+<span class="comment"># (از بالا کپی کنید)</span>
+
+<span class="comment"># 6. ذخیره requirements</span>
+<span class="command">pip freeze > requirements.txt</span>
+
+<span class="comment"># 7. ساخت README.md</span>
+<span class="comment"># (محتوای بالا را کپی کنید)</span>
+
+<span class="comment"># 8. تست</span>
+<span class="command">python api_client.py</span>
+<span class="output">✅ API Key loaded: test_key_1...
+✅ Base URL: https://api.example.com
+
+🎉 Configuration loaded successfully!</span></div>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="checkbox" class="exercise-check" data-points="30" data-ex="5">
+                        <span>✅ این تمرین را کامل کردم</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Final Challenge -->
+            <div class="checkpoint">
+                <h2>🏆 چالش نهایی</h2>
+                <p style="line-height: 2; margin: 1rem 0;">
+                    اگر تمام 5 تمرین را کامل کرده‌اید، این چالش را امتحان کنید:
+                </p>
+                <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                    <h3>🚀 ساخت یک ابزار Automation</h3>
+                    <p style="line-height: 2;">
+                        یک script PowerShell بنویسید (<code>create-project.ps1</code>) که:
+                    </p>
+                    <ul style="line-height: 2; margin-top: 1rem;">
+                        <li>نام پروژه را از کاربر بگیرد</li>
+                        <li>Automatically پوشه پروژه بسازد</li>
+                        <li>Virtual environment ایجاد و فعال کند</li>
+                        <li>فایل‌های <code>.gitignore</code>, <code>requirements.txt</code>, <code>README.md</code> بسازد</li>
+                        <li>ساختار پوشه استاندارد بسازد</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div style="display: flex; justify-content: space-between; margin-top: 3rem; padding: 2rem; background: #f8fafc; border-radius: 12px;">
+                <a href="../lessons/day01-environment-setup.html" class="btn btn-outline">← بازگشت به درس</a>
+                <button onclick="submitExercises()" class="btn btn-success">✅ ارسال تمرین‌ها</button>
+                <a href="../index.html" class="btn btn-primary">به صفحه اصلی →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>تمرین های روز 1 | "Practice makes perfect" 💪</p>
+        </div>
+    </footer>
+
+    <script>
+        let totalPoints = 0;
+        const maxPoints = 100;
+
+        function toggleHint(id) {
+            const hint = document.getElementById(id);
+            hint.style.display = hint.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function updateScore() {
+            const checkboxes = document.querySelectorAll('.exercise-check:checked');
+            totalPoints = 0;
+            checkboxes.forEach(cb => {
+                totalPoints += parseInt(cb.dataset.points);
+            });
+
+            document.getElementById('score').textContent = `${totalPoints}/${maxPoints}`;
+            document.getElementById('progressBar').style.width = `${(totalPoints/maxPoints)*100}%`;
+
+            // Save progress
+            localStorage.setItem('day01_exercise_score', totalPoints);
+            saveCompletedExercises();
+        }
+
+        function saveCompletedExercises() {
+            const completed = [];
+            document.querySelectorAll('.exercise-check:checked').forEach(cb => {
+                completed.push(cb.dataset.ex);
+            });
+            localStorage.setItem('day01_completed_exercises', JSON.stringify(completed));
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('day01_completed_exercises');
+            if (saved) {
+                const completed = JSON.parse(saved);
+                completed.forEach(exNum => {
+                    const checkbox = document.querySelector(`[data-ex="${exNum}"]`);
+                    if (checkbox) checkbox.checked = true;
+                });
+                updateScore();
+            }
+        }
+
+        function submitExercises() {
+            if (totalPoints >= 70) {
+                const message = totalPoints === 100 
+                    ? '🎉🎉🎉 عالی! نمره کامل!\n\nشما تمام تمرین‌ها را با موفقیت انجام دادید. آماده روز 2 هستید!'
+                    : `👍 خوب است! شما ${totalPoints} امتیاز کسب کردید.\n\nتوصیه: تمرین‌های باقی‌مانده را نیز انجام دهید.`;
+                
+                alert(message);
+                localStorage.setItem('day01_exercises_submitted', 'true');
+                localStorage.setItem('day01_final_score', totalPoints);
+            } else {
+                alert(`📖 نیاز به تمرین بیشتر\n\nشما ${totalPoints} امتیاز دارید. حداقل 70 امتیاز برای گذراندن روز 1 لازم است.\n\nلطفاً تمرین‌های دیگر را نیز انجام دهید.`);
+            }
+        }
+
+        // Event listeners
+        document.querySelectorAll('.exercise-check').forEach(checkbox => {
+            checkbox.addEventListener('change', updateScore);
+        });
+
+        // Load progress on page load
+        window.addEventListener('load', loadProgress);
+    </script>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python & Odoo Mastery | آموزشگاه تسلط برنامه‌نویسی</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🎓 Python & Odoo Mastery</h1>
+            <div class="nav-links">
+                <a href="#curriculum">برنامه آموزشی</a>
+                <a href="#progress">پیشرفت من</a>
+                <a href="#exercises">تمرین‌ها</a>
+                <a href="#resources">منابع</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h2 class="hero-title">مسیر تبدیل شدن به برنامه‌نویس حرفه‌ای Odoo</h2>
+            <p class="hero-subtitle">از مبانی حیاتی تا استقلال کامل برنامه‌نویسی</p>
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <span class="stat-number" id="totalLessons">90</span>
+                    <span class="stat-label">روز آموزش</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="completedLessons">0</span>
+                    <span class="stat-label">درس تکمیل شده</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="currentLevel">Level 0</span>
+                    <span class="stat-label">سطح فعلی</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="totalPoints">0</span>
+                    <span class="stat-label">امتیاز کسب شده</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Level Assessment Section -->
+        <section id="assessment" class="section">
+            <h2 class="section-title">🎯 سطح‌سنجی مهارت‌های فعلی</h2>
+            <div class="assessment-grid">
+                <div class="skill-category">
+                    <h3>Python Fundamentals</h3>
+                    <div class="skill-items">
+                        <label><input type="checkbox" class="skill-check" data-skill="python-basics"> متغیرها و انواع داده</label>
+                        <label><input type="checkbox" class="skill-check" data-skill="python-control"> Control Flow (if/for/while)</label>
+                        <label><input type="checkbox" class="skill-check" data-skill="python-functions"> توابع و ماژول‌ها</label>
+                        <label><input type="checkbox" class="skill-check" data-skill="python-oop"> برنامه‌نویسی شی‌گرا</label>
+                        <label><input type="checkbox" class="skill-check" data-skill="python-exceptions"> مدیریت خطاها</label>
+                        <label><input type="checkbox" class="skill-check" data-skill="python-files"> کار با فایل‌ها</label>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>PowerShell</h3>
+                    <div class="skill-items">
+                        <label><input type="checkbox" class="skill-check" data-skill="ps-cmdlets"> Cmdlets پایه</label>
+                        <label><input type="checkbox" class="skill-check" data-skill="ps-pipeline"> Pipeline و Object Processing</label>
+                        <label><input type="checkbox" class="skill-check" data-skill="ps-scripts"> نوشتن اسکریپت</label>
+                        <label><input type="checkbox" class="skill-check" data-skill="ps-automation"> اتوماسیون سرور</label>
+                        <label><input type="checkbox" class="skill-check" data-skill="ps-error"> Error Handling</label>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Database & SQL</h3>
+                    <div class="skill-items">
+                        <label><input type="checkbox" class="skill-check" data-skill="sql-select"> SELECT queries</label>
+                        <label><input type="checkbox" class="skill-check" data-skill="sql-joins"> JOINs</label>
+                        <label><input type="checkbox" class="skill-check" data-skill="sql-crud"> INSERT/UPDATE/DELETE</label>
+                        <label><input type="checkbox" class="skill-check" data-skill="sql-transactions"> Transactions</label>
+                        <label><input type="checkbox" class="skill-check" data-skill="sql-psycopg2"> Python psycopg2</label>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Odoo Development</h3>
+                    <div class="skill-items">
+                        <label><input type="checkbox" class="skill-check" data-skill="odoo-models"> Models & Fields</label>
+                        <label><input type="checkbox" class="skill-check" data-skill="odoo-views"> Views (XML)</label>
+                        <label><input type="checkbox" class="skill-check" data-skill="odoo-orm"> ORM Methods</label>
+                        <label><input type="checkbox" class="skill-check" data-skill="odoo-security"> Security & Access Rights</label>
+                        <label><input type="checkbox" class="skill-check" data-skill="odoo-workflow"> Workflows</label>
+                        <label><input type="checkbox" class="skill-check" data-skill="odoo-api"> External API</label>
+                    </div>
+                </div>
+            </div>
+            <button id="calculateLevel" class="btn btn-primary">محاسبه سطح من</button>
+            <div id="levelResult" class="level-result" style="display:none;"></div>
+        </section>
+
+        <!-- Current Lesson Section -->
+        <section id="currentLesson" class="section">
+            <h2 class="section-title">📚 درس امروز</h2>
+            <div class="lesson-card active-lesson">
+                <div class="lesson-header">
+                    <span class="lesson-day">روز 1</span>
+                    <span class="lesson-level">Level 0 - Critical Fundamentals</span>
+                    <span class="lesson-duration">⏱️ 45 دقیقه</span>
+                </div>
+                <h3 class="lesson-title">مبانی حیاتی: محیط توسعه و ساختار پروژه</h3>
+                <p class="lesson-description">
+                    پیش از نوشتن کد، باید محیط کاری حرفه‌ای بسازیم. درک Virtual Environment، 
+                    مدیریت Dependencies، و ساختار صحیح پروژه پایه‌های استقلال شماست.
+                </p>
+                <div class="lesson-objectives">
+                    <h4>🎯 اهداف یادگیری:</h4>
+                    <ul>
+                        <li>درک عمیق Virtual Environment و چرایی استفاده از آن</li>
+                        <li>تسلط بر pip و مدیریت packages</li>
+                        <li>ساختار استاندارد پروژه Python</li>
+                        <li>PowerShell commands برای مدیریت محیط</li>
+                        <li>Troubleshooting رایج‌ترین مشکلات</li>
+                    </ul>
+                </div>
+                <div class="lesson-actions">
+                    <a href="lessons/day01-environment-setup.html" class="btn btn-success">شروع درس</a>
+                    <a href="exercises/day01-exercise.html" class="btn btn-outline">تمرین‌ها</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Curriculum Overview -->
+        <section id="curriculum" class="section">
+            <h2 class="section-title">📖 برنامه آموزشی کامل (90 روزه)</h2>
+            
+            <div class="curriculum-phase">
+                <h3 class="phase-title">📌 Level 0: Critical Fundamentals (روز 1-10)</h3>
+                <div class="lessons-grid">
+                    <div class="lesson-item completed">
+                        <span class="lesson-number">1</span>
+                        <span class="lesson-name">محیط توسعه و Virtual Environment</span>
+                        <span class="lesson-status">✅</span>
+                    </div>
+                    <div class="lesson-item">
+                        <span class="lesson-number">2</span>
+                        <span class="lesson-name">PowerShell Essentials برای توسعه</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                    <div class="lesson-item">
+                        <span class="lesson-number">3</span>
+                        <span class="lesson-name">Git & Version Control حرفه‌ای</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                    <div class="lesson-item">
+                        <span class="lesson-number">4</span>
+                        <span class="lesson-name">Debugging Workflow و ابزارها</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                    <div class="lesson-item">
+                        <span class="lesson-number">5</span>
+                        <span class="lesson-name">Python Data Types - عمیق</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                    <div class="lesson-item">
+                        <span class="lesson-number">6</span>
+                        <span class="lesson-name">String Manipulation & Encoding</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                    <div class="lesson-item">
+                        <span class="lesson-number">7</span>
+                        <span class="lesson-name">Collections - List, Dict, Set</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                    <div class="lesson-item">
+                        <span class="lesson-number">8</span>
+                        <span class="lesson-name">Functions & Scope</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                    <div class="lesson-item">
+                        <span class="lesson-number">9</span>
+                        <span class="lesson-name">File I/O & Path Handling</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                    <div class="lesson-item">
+                        <span class="lesson-number">10</span>
+                        <span class="lesson-name">Exception Handling حرفه‌ای</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="curriculum-phase">
+                <h3 class="phase-title">🔧 Level 1: Intermediate Python (روز 11-30)</h3>
+                <div class="lessons-grid">
+                    <div class="lesson-item">
+                        <span class="lesson-number">11-15</span>
+                        <span class="lesson-name">OOP - Classes, Inheritance, Polymorphism</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                    <div class="lesson-item">
+                        <span class="lesson-number">16-20</span>
+                        <span class="lesson-name">Decorators, Generators, Context Managers</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                    <div class="lesson-item">
+                        <span class="lesson-number">21-25</span>
+                        <span class="lesson-name">Modules, Packages, Import System</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                    <div class="lesson-item">
+                        <span class="lesson-number">26-30</span>
+                        <span class="lesson-name">Testing - unittest, pytest</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="curriculum-phase">
+                <h3 class="phase-title">🗄️ Level 2: Database & SQL (روز 31-45)</h3>
+                <div class="lessons-grid">
+                    <div class="lesson-item">
+                        <span class="lesson-number">31-35</span>
+                        <span class="lesson-name">PostgreSQL Fundamentals</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                    <div class="lesson-item">
+                        <span class="lesson-number">36-40</span>
+                        <span class="lesson-name">Advanced SQL - Joins, Subqueries, CTEs</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                    <div class="lesson-item">
+                        <span class="lesson-number">41-45</span>
+                        <span class="lesson-name">Python Database Programming (psycopg2)</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="curriculum-phase">
+                <h3 class="phase-title">🚀 Level 3: Odoo Development (روز 46-75)</h3>
+                <div class="lessons-grid">
+                    <div class="lesson-item">
+                        <span class="lesson-number">46-50</span>
+                        <span class="lesson-name">Odoo Architecture & Framework</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                    <div class="lesson-item">
+                        <span class="lesson-number">51-55</span>
+                        <span class="lesson-name">Models & ORM</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                    <div class="lesson-item">
+                        <span class="lesson-number">56-60</span>
+                        <span class="lesson-name">Views - Form, Tree, Kanban, QWeb</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                    <div class="lesson-item">
+                        <span class="lesson-number">61-65</span>
+                        <span class="lesson-name">Business Logic & Workflows</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                    <div class="lesson-item">
+                        <span class="lesson-number">66-70</span>
+                        <span class="lesson-name">Security, Access Rights & Record Rules</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                    <div class="lesson-item">
+                        <span class="lesson-number">71-75</span>
+                        <span class="lesson-name">Reports, Wizards & Actions</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="curriculum-phase">
+                <h3 class="phase-title">⚡ Level 4: Advanced & Production (روز 76-90)</h3>
+                <div class="lessons-grid">
+                    <div class="lesson-item">
+                        <span class="lesson-number">76-80</span>
+                        <span class="lesson-name">Performance Optimization</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                    <div class="lesson-item">
+                        <span class="lesson-number">81-85</span>
+                        <span class="lesson-name">API Integration & External Services</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                    <div class="lesson-item">
+                        <span class="lesson-number">86-90</span>
+                        <span class="lesson-name">Deployment & Production Best Practices</span>
+                        <span class="lesson-status">🔒</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Reference -->
+        <section id="resources" class="section">
+            <h2 class="section-title">📚 مراجع سریع</h2>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <h3>🐍 Python Cheatsheet</h3>
+                    <a href="assets/python-cheatsheet.html" class="btn btn-sm">مشاهده</a>
+                </div>
+                <div class="resource-card">
+                    <h3>💻 PowerShell Commands</h3>
+                    <a href="assets/powershell-reference.html" class="btn btn-sm">مشاهده</a>
+                </div>
+                <div class="resource-card">
+                    <h3>🗄️ SQL Reference</h3>
+                    <a href="assets/sql-reference.html" class="btn btn-sm">مشاهده</a>
+                </div>
+                <div class="resource-card">
+                    <h3>🚀 Odoo API Docs</h3>
+                    <a href="assets/odoo-api.html" class="btn btn-sm">مشاهده</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🎯 هدف: تبدیل شدن به برنامه‌نویس مستقل و حرفه‌ای | آغاز: {{ today }} | پایان: {{ 90days }}</p>
+            <p class="quote">"The only way to learn programming is by writing programs." - Dennis Ritchie</p>
+        </div>
+    </footer>
+
+    <script src="assets/script.js"></script>
+</body>
+</html>

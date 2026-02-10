@@ -1,0 +1,179 @@
+{
+  "projectName": "Python & Odoo Mastery",
+  "version": "1.0.0",
+  "createdDate": "2026-02-10",
+  "totalDays": 90,
+  "currentDay": 1,
+  "status": "active",
+  
+  "student": {
+    "role": "برنامه‌نویس شرکت",
+    "goal": "تبدیل شدن به توسعه‌دهنده مستقل Odoo",
+    "currentLevel": "Level 0",
+    "totalPoints": 0
+  },
+
+  "curriculum": {
+    "level0": {
+      "title": "Critical Fundamentals",
+      "days": "1-10",
+      "status": "in-progress",
+      "completedDays": 0,
+      "lessons": {
+        "day01": {
+          "title": "محیط توسعه و Virtual Environment",
+          "status": "created",
+          "files": [
+            "lessons/day01-environment-setup.html",
+            "exercises/day01-exercise.html"
+          ],
+          "topics": [
+            "Virtual Environment چیست و چرا نیازش داریم",
+            "ساخت و مدیریت venv",
+            "نصب و مدیریت packages با pip",
+            "PowerShell commands پایه",
+            "Troubleshooting مشکلات رایج"
+          ],
+          "exercises": 5,
+          "duration": "45 minutes",
+          "createdDate": "2026-02-10"
+        },
+        "day02": {
+          "title": "PowerShell Essentials برای توسعه",
+          "status": "pending",
+          "plannedTopics": [
+            "Cmdlets پایه و Pipeline",
+            "Object Processing",
+            "Script نویسی",
+            "Automation scenarios",
+            "Error Handling"
+          ]
+        },
+        "day03": {
+          "title": "Git & Version Control حرفه‌ای",
+          "status": "pending"
+        },
+        "day04": {
+          "title": "Debugging Workflow و ابزارها",
+          "status": "pending"
+        },
+        "day05": {
+          "title": "Python Data Types - عمیق",
+          "status": "pending"
+        },
+        "day06": {
+          "title": "String Manipulation & Encoding",
+          "status": "pending"
+        },
+        "day07": {
+          "title": "Collections - List, Dict, Set",
+          "status": "pending"
+        },
+        "day08": {
+          "title": "Functions & Scope",
+          "status": "pending"
+        },
+        "day09": {
+          "title": "File I/O & Path Handling",
+          "status": "pending"
+        },
+        "day10": {
+          "title": "Exception Handling حرفه‌ای",
+          "status": "pending"
+        }
+      }
+    },
+    "level1": {
+      "title": "Intermediate Python",
+      "days": "11-30",
+      "status": "pending",
+      "completedDays": 0
+    },
+    "level2": {
+      "title": "Database & SQL",
+      "days": "31-45",
+      "status": "pending",
+      "completedDays": 0
+    },
+    "level3": {
+      "title": "Odoo Development",
+      "days": "46-75",
+      "status": "pending",
+      "completedDays": 0
+    },
+    "level4": {
+      "title": "Advanced & Production",
+      "days": "76-90",
+      "status": "pending",
+      "completedDays": 0
+    }
+  },
+
+  "features": {
+    "progressTracking": true,
+    "levelAssessment": true,
+    "interactiveExercises": true,
+    "quizzes": true,
+    "gamification": true,
+    "localStorage": true,
+    "multiLanguage": false,
+    "darkMode": false
+  },
+
+  "technologies": {
+    "frontend": ["HTML5", "CSS3", "JavaScript (Vanilla)"],
+    "fonts": ["Vazirmatn", "Fira Code"],
+    "storage": "localStorage",
+    "framework": "None (Pure Web)"
+  },
+
+  "fileStructure": {
+    "created": [
+      "index.html",
+      "assets/style.css",
+      "assets/script.js",
+      "lessons/day01-environment-setup.html",
+      "exercises/day01-exercise.html",
+      "README.md",
+      "START-HERE.md",
+      "project-status.json"
+    ],
+    "pending": [
+      "lessons/day02-day90.html",
+      "exercises/day02-day90.html",
+      "solutions/day01-day90.html",
+      "assets/python-cheatsheet.html",
+      "assets/powershell-reference.html",
+      "assets/sql-reference.html",
+      "assets/odoo-api.html"
+    ]
+  },
+
+  "dailyCreationProcess": {
+    "whenStudentReady": true,
+    "studentInitiates": "روز [X] را شروع کنیم",
+    "aiCreates": [
+      "Lesson content (HTML)",
+      "Exercises (5-7 practical tasks)",
+      "Quiz questions",
+      "Solutions"
+    ],
+    "estimatedTime": "5-10 minutes per day"
+  },
+
+  "notes": [
+    "این یک پلتفرم آموزشی تعاملی کاملاً جدا از پروژه Odoo اصلی است",
+    "هر روز با درخواست دانشجو ساخته می‌شود",
+    "تمرکز بر استقلال و عدم وابستگی به AI",
+    "تمرین‌ها الزامی و عملی هستند",
+    "سیستم امتیازدهی و tracking وجود دارد"
+  ],
+
+  "nextSteps": [
+    "دانشجو index.html را باز می‌کند",
+    "سطح‌سنجی اولیه انجام می‌شود",
+    "روز 1 شروع می‌شود",
+    "بعد از تکمیل روز 1، دانشجو برای روز 2 می‌آید",
+    "هر روز یک lesson + exercises جدید ساخته می‌شود"
+  ]
+}

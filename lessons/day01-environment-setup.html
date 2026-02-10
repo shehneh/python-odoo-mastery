@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>روز 1: محیط توسعه و Virtual Environment | Python Mastery</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-left: 4px solid #3b82f6;
+            direction: ltr;
+            text-align: left;
+        }
+        .code-block .comment {
+            color: #94a3b8;
+        }
+        .code-block .command {
+            color: #60a5fa;
+        }
+        .code-block .output {
+            color: #34d399;
+        }
+        .code-block .error {
+            color: #f87171;
+        }
+        .warning-box {
+            background: #fef3c7;
+            border-right: 4px solid #f59e0b;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .success-box {
+            background: #d1fae5;
+            border-right: 4px solid #10b981;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .critical-box {
+            background: #fee2e2;
+            border-right: 4px solid #ef4444;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .lesson-content {
+            max-width: 900px;
+            margin: 2rem auto;
+        }
+        .concept-card {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            border: 2px solid #e2e8f0;
+        }
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            margin-left: 0.5rem;
+        }
+        .practice-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+        .quiz-option {
+            background: white;
+            color: #1f2937;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        .quiz-option:hover {
+            border-color: #3b82f6;
+            transform: translateX(-4px);
+        }
+        .quiz-option.correct {
+            border-color: #10b981;
+            background: #d1fae5;
+        }
+        .quiz-option.wrong {
+            border-color: #ef4444;
+            background: #fee2e2;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🎓 Python & Odoo Mastery</h1>
+            <div class="nav-links">
+                <a href="../index.html">← بازگشت به صفحه اصلی</a>
+                <a href="#practice">تمرین</a>
+                <a href="#quiz">آزمون</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container lesson-content">
+        <div class="section">
+            <div class="lesson-header">
+                <span class="lesson-day">روز 1</span>
+                <span class="lesson-level">Level 0 - Critical Fundamentals</span>
+                <span class="lesson-duration">⏱️ 45 دقیقه</span>
+            </div>
+            
+            <h1 style="font-size: 2.5rem; margin: 1.5rem 0; color: #1e293b;">
+                مبانی حیاتی: محیط توسعه و Virtual Environment
+            </h1>
+
+            <div class="critical-box">
+                <h3>🔴 چرا این درس حیاتی است؟</h3>
+                <p>
+                    90% از مشکلاتی که برنامه‌نویسان مبتدی با آن‌ها دست و پنجه نرم می‌کنند، 
+                    ناشی از عدم درک صحیح Virtual Environment است. اگر این مبحث را درست یاد بگیرید، 
+                    از ماه‌ها سردرگمی جلوگیری خواهید کرد.
+                </p>
+            </div>
+
+            <!-- Section 1: The Problem -->
+            <h2 style="color: #3b82f6; margin-top: 3rem;">📌 مشکل چیست؟</h2>
+            
+            <p style="font-size: 1.125rem; line-height: 2; margin: 1.5rem 0;">
+                تصور کنید روی کامپیوتر شما این پروژه‌ها نصب است:
+            </p>
+
+            <div class="concept-card">
+                <ul style="line-height: 2;">
+                    <li><strong>پروژه A (Odoo 17):</strong> نیاز به Python 3.10 و psycopg2 نسخه 2.9</li>
+                    <li><strong>پروژه B (Odoo 19):</strong> نیاز به Python 3.11 و psycopg2 نسخه 2.9.9</li>
+                    <li><strong>پروژه C (Django):</strong> نیاز به Python 3.11 و psycopg2 نسخه 3.x</li>
+                </ul>
+            </div>
+
+            <div class="critical-box">
+                <h4>❌ اگر Virtual Environment نداشته باشید:</h4>
+                <p>
+                    همه packages روی سیستم اصلی نصب می‌شوند. وقتی psycopg2 را برای پروژه C به نسخه 3 
+                    ارتقا دهید، پروژه‌های A و B خراب می‌شوند! این را <strong>"Dependency Hell"</strong> می‌نامند.
+                </p>
+            </div>
+
+            <div class="success-box">
+                <h4>✅ با Virtual Environment:</h4>
+                <p>
+                    هر پروژه محیط مستقل خودش را دارد. تغییرات در یک پروژه، روی پروژه‌های دیگر تأثیر نمی‌گذارد. 
+                    شما کنترل کامل دارید!
+                </p>
+            </div>
+
+            <!-- Section 2: What is venv? -->
+            <h2 style="color: #3b82f6; margin-top: 3rem;">🔍 Virtual Environment دقیقاً چیست؟</h2>
+
+            <div class="concept-card">
+                <h3>تعریف ساده:</h3>
+                <p style="font-size: 1.125rem; line-height: 2;">
+                    Virtual Environment یک پوشه است که شامل:
+                </p>
+                <ul style="line-height: 2; margin-top: 1rem;">
+                    <li>📁 کپی مستقل Python interpreter</li>
+                    <li>📦 مجموعه مستقل packages (نصب شده با pip)</li>
+                    <li>⚙️ Scripts برای فعال‌سازی محیط</li>
+                    <li>📝 فایل‌های پیکربندی</li>
+                </ul>
+            </div>
+
+            <p style="font-size: 1.125rem; line-height: 2; margin: 1.5rem 0;">
+                <strong>ساختار یک Virtual Environment:</strong>
+            </p>
+
+<div class="code-block">.venv/                          <span class="comment"># نام پوشه (convention معمول)</span>
+├── Scripts/                    <span class="comment"># در Windows</span>
+│   ├── python.exe             <span class="comment"># Python مستقل این محیط</span>
+│   ├── pip.exe                <span class="comment"># Package manager مستقل</span>
+│   ├── Activate.ps1           <span class="comment"># فعال‌ساز PowerShell</span>
+│   └── activate.bat           <span class="comment"># فعال‌ساز CMD</span>
+├── Lib/                        <span class="comment"># مخزن کتابخانه‌ها</span>
+│   └── site-packages/         <span class="comment"># Packages نصب شده با pip</span>
+│       ├── psycopg2/
+│       ├── werkzeug/
+│       └── ...
+└── pyvenv.cfg                  <span class="comment"># فایل کانفیگ</span></div>
+
+            <!-- Section 3: Creating venv -->
+            <h2 style="color: #3b82f6; margin-top: 3rem;">🛠️ ساخت Virtual Environment</h2>
+
+            <div class="concept-card">
+                <h3><span class="step-number">1</span> باز کردن PowerShell در پوشه پروژه</h3>
+                <p>در VS Code: <code>Ctrl + `</code> یا از منو Terminal → New Terminal</p>
+            </div>
+
+            <div class="concept-card">
+                <h3><span class="step-number">2</span> ساخت Virtual Environment</h3>
+
+<div class="code-block"><span class="comment"># دستور ساخت venv</span>
+<span class="command">python -m venv .venv</span>
+
+<span class="comment"># توضیح:</span>
+<span class="comment"># python      → اجرای Python</span>
+<span class="comment"># -m venv     → اجرای ماژول venv</span>
+<span class="comment"># .venv       → نام پوشه (. در ابتدا یعنی hidden folder)</span></div>
+
+                <div class="warning-box">
+                    <h4>⚠️ مشکل رایج: "python is not recognized"</h4>
+                    <p><strong>علت:</strong> Python در PATH سیستم نیست.</p>
+                    <p><strong>راه حل:</strong> از مسیر کامل استفاده کنید:</p>
+<div class="code-block"><span class="command">C:\Python311\python.exe -m venv .venv</span></div>
+                </div>
+            </div>
+
+            <div class="concept-card">
+                <h3><span class="step-number">3</span> فعال‌سازی Virtual Environment</h3>
+
+<div class="code-block"><span class="comment"># در PowerShell:</span>
+<span class="command">.\.venv\Scripts\Activate.ps1</span>
+
+<span class="comment"># یا با مسیر کامل:</span>
+<span class="command">& "D:\MyProject\.venv\Scripts\Activate.ps1"</span>
+
+<span class="comment"># بعد از فعال‌سازی، این را خواهید دید:</span>
+<span class="output">(.venv) PS D:\MyProject></span></div>
+
+                <div class="critical-box">
+                    <h4>🔴 خطای Execution Policy</h4>
+                    <p>اگر این خطا را دیدید:</p>
+<div class="code-block"><span class="error">Activate.ps1 cannot be loaded because running scripts is disabled</span></div>
+                    <p><strong>راه حل (یکبار برای همیشه):</strong></p>
+<div class="code-block"><span class="comment"># اجرای PowerShell به عنوان Administrator</span>
+<span class="command">Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser</span>
+<span class="output">Execution Policy Change
+The execution policy helps protect you from scripts that you do not trust...
+Do you want to change the execution policy?
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help:</span>
+<span class="command">Y</span></div>
+                </div>
+            </div>
+
+            <div class="concept-card">
+                <h3><span class="step-number">4</span> تأیید فعال‌سازی</h3>
+
+<div class="code-block"><span class="comment"># چک کردن مسیر Python</span>
+<span class="command">Get-Command python | Select-Object Source</span>
+
+<span class="output">Source
+------
+D:\MyProject\.venv\Scripts\python.exe</span>
+
+<span class="comment"># چک کردن نسخه</span>
+<span class="command">python --version</span>
+<span class="output">Python 3.11.8</span></div>
+            </div>
+
+            <!-- Section 4: Installing Packages -->
+            <h2 style="color: #3b82f6; margin-top: 3rem;">📦 نصب و مدیریت Packages</h2>
+
+            <div class="concept-card">
+                <h3>نصب package با pip</h3>
+
+<div class="code-block"><span class="comment"># نصب یک package</span>
+<span class="command">pip install psycopg2-binary</span>
+
+<span class="comment"># نصب نسخه خاص</span>
+<span class="command">pip install psycopg2-binary==2.9.9</span>
+
+<span class="comment"># نصب چند package</span>
+<span class="command">pip install werkzeug lxml pillow</span>
+
+<span class="comment"># لیست packages نصب شده</span>
+<span class="command">pip list</span>
+
+<span class="output">Package         Version
+--------------- -------
+pip             23.3.1
+psycopg2-binary 2.9.9
+setuptools      69.0.2
+werkzeug        3.0.1</span></div>
+            </div>
+
+            <div class="concept-card">
+                <h3>ذخیره و بازیابی Dependencies</h3>
+
+<div class="code-block"><span class="comment"># ذخیره لیست packages در فایل</span>
+<span class="command">pip freeze > requirements.txt</span>
+
+<span class="comment"># محتوای requirements.txt:</span>
+<span class="output">psycopg2-binary==2.9.9
+werkzeug==3.0.1
+lxml==5.1.0
+pillow==10.2.0</span>
+
+<span class="comment"># نصب از requirements.txt (در سرور جدید یا برای همکاران)</span>
+<span class="command">pip install -r requirements.txt</span></div>
+
+                <div class="success-box">
+                    <h4>✅ Best Practice</h4>
+                    <p>همیشه <code>requirements.txt</code> را در Git commit کنید تا همکاران شما 
+                    دقیقاً همان نسخه‌های package را نصب کنند.</p>
+                </div>
+            </div>
+
+            <!-- Section 5: PowerShell Commands -->
+            <h2 style="color: #3b82f6; margin-top: 3rem;">💻 دستورات PowerShell ضروری</h2>
+
+            <div class="concept-card">
+                <h3>مدیریت فایل‌ها و پوشه‌ها</h3>
+
+<div class="code-block"><span class="comment"># مشاهده فایل‌ها و پوشه‌ها</span>
+<span class="command">Get-ChildItem</span>
+<span class="command">ls</span>                          <span class="comment"># alias کوتاه‌تر</span>
+<span class="command">dir</span>                         <span class="comment"># alias سبک CMD</span>
+
+<span class="comment"># فقط پوشه‌ها</span>
+<span class="command">Get-ChildItem -Directory</span>
+
+<span class="comment"># فقط فایل‌های Python</span>
+<span class="command">Get-ChildItem -Filter "*.py"</span>
+
+<span class="comment"># تغییر مسیر</span>
+<span class="command">cd D:\Projects\Odoo</span>
+<span class="command">Set-Location D:\Projects\Odoo</span>     <span class="comment"># نام کامل</span>
+
+<span class="comment"># برگشت به پوشه قبل</span>
+<span class="command">cd ..</span>
+
+<span class="comment"># مشاهده مسیر فعلی</span>
+<span class="command">pwd</span>
+<span class="command">$PWD</span>                        <span class="comment"># متغیر اتوماتیک</span>
+
+<span class="comment"># ساخت پوشه</span>
+<span class="command">New-Item -ItemType Directory -Name "myproject"</span>
+<span class="command">mkdir myproject</span>             <span class="comment"># alias کوتاه</span>
+
+<span class="comment"># ساخت فایل</span>
+<span class="command">New-Item -ItemType File -Name "config.py"</span>
+
+<span class="comment"># حذف فایل</span>
+<span class="command">Remove-Item "temp.txt"</span>
+<span class="command">rm temp.txt</span>                 <span class="comment"># alias</span>
+
+<span class="comment"># کپی فایل</span>
+<span class="command">Copy-Item "source.py" -Destination "backup.py"</span></div>
+            </div>
+
+            <div class="concept-card">
+                <h3>کار با متغیرهای محیطی (Environment Variables)</h3>
+
+<div class="code-block"><span class="comment"># مشاهده متغیر</span>
+<span class="command">$env:PATH</span>
+<span class="command">$env:PGPASSWORD</span>
+
+<span class="comment"># تنظیم موقت (فقط در session فعلی)</span>
+<span class="command">$env:PGPASSWORD = 'mypassword'</span>
+
+<span class="comment"># اجرای دستور با متغیر موقت</span>
+<span class="command">$env:PGPASSWORD='odoo'; psql -U odoo -d mydb</span>
+
+<span class="comment"># مشاهده تمام متغیرها</span>
+<span class="command">Get-ChildItem Env:</span></div>
+            </div>
+
+            <div class="concept-card">
+                <h3>Pipe و Object Processing (قدرت واقعی PowerShell)</h3>
+
+<div class="code-block"><span class="comment"># لیست فایل‌های بزرگ‌تر از 1MB</span>
+<span class="command">Get-ChildItem | Where-Object { $_.Length -gt 1MB } | Select-Object Name, Length</span>
+
+<span class="comment"># پیدا کردن فرآیند Python</span>
+<span class="command">Get-Process | Where-Object { $_.Name -like '*python*' }</span>
+
+<span class="comment"># Kill کردن همه فرآیندهای Python</span>
+<span class="command">Get-Process python | Stop-Process -Force</span>
+
+<span class="comment"># جستجوی متن در فایل‌ها</span>
+<span class="command">Get-ChildItem -Recurse -Filter "*.py" | Select-String "import psycopg2"</span>
+
+<span class="comment"># سورت کردن فایل‌ها بر اساس سایز</span>
+<span class="command">Get-ChildItem | Sort-Object Length -Descending | Select-Object -First 10</span></div>
+
+                <div class="warning-box">
+                    <h4>🔑 کلید درک PowerShell: همه چیز Object است</h4>
+                    <p>
+                        برخلاف Bash که با متن کار می‌کند، PowerShell با objects کار می‌کند. 
+                        <code>Get-ChildItem</code> لیستی از FileInfo objects برمی‌گرداند که 
+                        properties مثل Name, Length, LastWriteTime دارند.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Section 6: Common Issues -->
+            <h2 style="color: #3b82f6; margin-top: 3rem;">🔧 Troubleshooting رایج‌ترین مشکلات</h2>
+
+            <div class="concept-card">
+                <h3>مشکل 1: Package نصب می‌شود اما import کار نمی‌کند</h3>
+                
+                <div class="critical-box">
+                    <h4>علامت:</h4>
+<div class="code-block"><span class="command">pip install psycopg2</span>
+<span class="output">Successfully installed psycopg2</span>
+
+<span class="command">python</span>
+<span class="command">>>>import psycopg2</span>
+<span class="error">ModuleNotFoundError: No module named 'psycopg2'</span></div>
+                </div>
+
+                <div class="success-box">
+                    <h4>تشخیص:</h4>
+<div class="code-block"><span class="comment"># چک کنید کدام Python در حال اجراست</span>
+<span class="command">Get-Command python | Select-Object Source</span>
+<span class="output">D:\Python311\python.exe</span>        <span class="comment"># ❌ Python سیستم!</span>
+
+<span class="comment"># چک کنید کدام pip استفاده شد</span>
+<span class="command">Get-Command pip | Select-Object Source</span>
+<span class="output">D:\MyProject\.venv\Scripts\pip.exe</span>  <span class="comment"># ✅ pip محیط مجازی</span></div>
+
+                    <h4>راه حل:</h4>
+                    <ul>
+                        <li>Virtual environment فعال است؟ باید <code>(.venv)</code> را ببینید</li>
+                        <li>VS Code از Python درست استفاده می‌کند؟ (Ctrl+Shift+P → "Python: Select Interpreter")</li>
+                        <li>اگر نه، بدون venv فعال‌سازی، دستور را دوباره اجرا کنید</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="concept-card">
+                <h3>مشکل 2: "Access Denied" هنگام نصب package</h3>
+                
+                <div class="warning-box">
+                    <h4>علت معمول:</h4>
+                    <ul>
+                        <li>PowerShell به عنوان Administrator باز نیست (اگر روی سیستم نصب می‌کنید)</li>
+                        <li>فایل‌های package قبلی قفل شده‌اند</li>
+                        <li>Antivirus دارد مداخله می‌کند</li>
+                    </ul>
+                </div>
+
+                <div class="success-box">
+                    <h4>راه حل:</h4>
+<div class="code-block"><span class="comment"># نصب فقط برای user فعلی (نیازی به Admin نیست)</span>
+<span class="command">pip install --user package_name</span>
+
+<span class="comment"># یا force reinstall</span>
+<span class="command">pip install --force-reinstall package_name</span></div>
+                </div>
+            </div>
+
+            <div class="concept-card">
+                <h3>مشکل 3: venv در Git push شد و repository خیلی بزرگ شد</h3>
+                
+                <div class="critical-box">
+                    <h4>❌ هرگز .venv را push نکنید!</h4>
+                    <p>Virtual environment شامل هزاران فایل است و نباید در Git باشد.</p>
+                </div>
+
+                <div class="success-box">
+                    <h4>راه حل:</h4>
+                    <p>فایل <code>.gitignore</code> بسازید:</p>
+<div class="code-block"><span class="comment"># .gitignore</span>
+.venv/
+venv/
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/</div>
+                </div>
+            </div>
+
+            <!-- Practice Section -->
+            <div id="practice" class="practice-section">
+                <h2 style="margin-bottom: 1.5rem;">🎯 تمرین عملی - الزامی!</h2>
+                
+                <h3>تمرین 1: ساخت پروژه با venv</h3>
+                <ol style="line-height: 2; margin: 1rem 0;">
+                    <li>یک پوشه به نام <code>odoo_practice</code> بسازید</li>
+                    <li>Virtual environment با نام <code>.venv</code> بسازید</li>
+                    <li>آن را فعال کنید</li>
+                    <li>packages زیر را نصب کنید: <code>psycopg2-binary werkzeug lxml</code></li>
+                    <li>فایل <code>requirements.txt</code> بسازید</li>
+                    <li>فایل Python به نام <code>test_imports.py</code> بسازید و import کنید</li>
+                </ol>
+
+                <h3>test_imports.py - کد شما:</h3>
+<div class="code-block" style="background: white; color: #1e293b;"><span class="comment"># test_imports.py</span>
+import sys
+import psycopg2
+import werkzeug
+import lxml
+
+print("✅ Python version:", sys.version)
+print("✅ Python path:", sys.executable)
+print("✅ psycopg2 version:", psycopg2.__version__)
+print("✅ werkzeug version:", werkzeug.__version__)
+print("✅ lxml version:", lxml.__version__)
+print("\n🎉 همه چیز درست کار می‌کند!")</div>
+
+                <h3>اجرا:</h3>
+<div class="code-block"><span class="command">python test_imports.py</span></div>
+
+                <button onclick="showSolution('practice1')" class="btn btn-sm" style="margin-top: 1rem;">
+                    نمایش راه حل کامل
+                </button>
+                <div id="practice1-solution" style="display:none; margin-top: 1rem; background: white; color: #1e293b; padding: 1.5rem; border-radius: 8px;">
+<div class="code-block" style="background: #1e293b; color: #e2e8f0;"><span class="comment"># مرحله به مرحله:</span>
+
+<span class="comment"># 1. ساخت پوشه</span>
+<span class="command">mkdir odoo_practice</span>
+<span class="command">cd odoo_practice</span>
+
+<span class="comment"># 2. ساخت venv</span>
+<span class="command">python -m venv .venv</span>
+
+<span class="comment"># 3. فعال‌سازی</span>
+<span class="command">.\.venv\Scripts\Activate.ps1</span>
+
+<span class="comment"># 4. نصب packages</span>
+<span class="command">pip install psycopg2-binary werkzeug lxml</span>
+
+<span class="comment"># 5. ذخیره requirements</span>
+<span class="command">pip freeze > requirements.txt</span>
+
+<span class="comment"># 6. ساخت فایل test</span>
+<span class="command">New-Item -ItemType File -Name "test_imports.py"</span>
+
+<span class="comment"># کد را در فایل کپی کنید، سپس:</span>
+<span class="command">python test_imports.py</span>
+
+<span class="output">✅ Python version: 3.11.8 (tags/v3.11.8:..., Feb  6 2024, 21:42:24)
+✅ Python path: D:\odoo_practice\.venv\Scripts\python.exe
+✅ psycopg2 version: 2.9.9
+✅ werkzeug version: 3.0.1
+✅ lxml version: 5.1.0
+
+🎉 همه چیز درست کار می‌کند!</span></div>
+                </div>
+            </div>
+
+            <!-- Quiz Section -->
+            <div id="quiz" class="section" style="margin-top: 3rem;">
+                <h2 style="color: #3b82f6;">📝 آزمون درک مطلب</h2>
+                
+                <div class="concept-card">
+                    <h3>سؤال 1: کدام دستور Virtual Environment می‌سازد؟</h3>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        A) <code>pip install venv</code>
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">
+                        B) <code>python -m venv .venv</code>
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        C) <code>virtualenv create .venv</code>
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        D) <code>python --create-venv .venv</code>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <h3>سؤال 2: علامت فعال بودن venv در PowerShell چیست؟</h3>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        A) <code>[venv] PS></code>
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">
+                        B) <code>(.venv) PS></code>
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        C) <code>PS [venv]></code>
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        D) هیچ علامتی نیست
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <h3>سؤال 3: چرا از requirements.txt استفاده می‌کنیم؟</h3>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        A) برای بهبود سرعت Python
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">
+                        B) برای ثبت و نصب دقیق همان نسخه‌های package در محیط‌های دیگر
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        C) برای کامپایل کردن Python به EXE
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        D) فقط برای Odoo ضروری است
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <h3>سؤال 4: در PowerShell، <code>$_</code> به چه معناست؟</h3>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        A) مسیر فعلی
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        B) نام کاربری
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">
+                        C) شیء فعلی در pipeline
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        D) خطای آخرین دستور
+                    </div>
+                </div>
+
+                <div id="quizResult" style="margin-top: 2rem; padding: 1.5rem; border-radius: 8px; display: none;"></div>
+            </div>
+
+            <!-- Navigation -->
+            <div style="display: flex; justify-content: space-between; margin-top: 3rem; padding: 2rem; background: #f8fafc; border-radius: 12px;">
+                <a href="../index.html" class="btn btn-outline">← بازگشت به صفحه اصلی</a>
+                <button onclick="markComplete()" class="btn btn-success">✅ درس را تکمیل کردم</button>
+                <a href="day02-powershell-essentials.html" class="btn btn-primary">درس بعد: PowerShell Essentials →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>روز 1 از 90 | هر روز کمی بهتر از دیروز 💪</p>
+        </div>
+    </footer>
+
+    <script>
+        let correctAnswers = 0;
+        let totalQuestions = 4;
+
+        function checkAnswer(element, isCorrect) {
+            // Reset all options in this question
+            const parent = element.parentElement;
+            parent.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('correct', 'wrong');
+                opt.style.pointerEvents = 'none';
+            });
+
+            if (isCorrect) {
+                element.classList.add('correct');
+                correctAnswers++;
+            } else {
+                element.classList.add('wrong');
+                // Show correct answer
+                parent.querySelectorAll('.quiz-option').forEach(opt => {
+                    if (opt.onclick.toString().includes('true')) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+
+            updateQuizResult();
+        }
+
+        function updateQuizResult() {
+            const result = document.getElementById('quizResult');
+            const answeredQuestions = document.querySelectorAll('.quiz-option.correct, .quiz-option.wrong').length / 4;
+            
+            if (answeredQuestions === totalQuestions) {
+                const percentage = (correctAnswers / totalQuestions) * 100;
+                result.style.display = 'block';
+                
+                if (percentage === 100) {
+                    result.style.background = '#d1fae5';
+                    result.style.color = '#065f46';
+                    result.innerHTML = `
+                        <h3>🎉 عالی! نمره کامل!</h3>
+                        <p>شما ${correctAnswers} از ${totalQuestions} سؤال را درست پاسخ دادید.</p>
+                        <p>مفاهیم را به خوبی درک کرده‌اید. آماده روز بعد هستید!</p>
+                    `;
+                } else if (percentage >= 75) {
+                    result.style.background = '#fef3c7';
+                    result.style.color = '#78350f';
+                    result.innerHTML = `
+                        <h3>👍 خوب است!</h3>
+                        <p>شما ${correctAnswers} از ${totalQuestions} سؤال را درست پاسخ دادید.</p>
+                        <p>مطالب را مرور کنید و سپس ادامه دهید.</p>
+                    `;
+                } else {
+                    result.style.background = '#fee2e2';
+                    result.style.color = '#7f1d1d';
+                    result.innerHTML = `
+                        <h3>📖 نیاز به مرور</h3>
+                        <p>شما ${correctAnswers} از ${totalQuestions} سؤال را درست پاسخ دادید.</p>
+                        <p>لطفاً درس را دوباره بخوانید و تمرین عملی را انجام دهید.</p>
+                    `;
+                }
+            }
+        }
+
+        function showSolution(id) {
+            const solution = document.getElementById(id + '-solution');
+            solution.style.display = solution.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function markComplete() {
+            if (confirm('آیا تمرین عملی را انجام داده و مطمئن هستید که آماده روز بعد هستید؟')) {
+                // Mark lesson as complete in main platform
+                if (window.opener && window.opener.masteryPlatform) {
+                    window.opener.masteryPlatform.markLessonComplete(1);
+                }
+                
+                // Save locally
+                localStorage.setItem('lesson_day01_complete', 'true');
+                localStorage.setItem('lesson_day01_date', new Date().toISOString());
+                
+                alert('🎉 تبریک! روز 1 تکمیل شد. فردا روز 2 را شروع کنید.');
+                
+                // Update UI
+                const btn = event.target;
+                btn.textContent = '✅ تکمیل شده';
+                btn.disabled = true;
+                btn.style.background = '#10b981';
+            }
+        }
+
+        // Check if already completed
+        window.addEventListener('load', () => {
+            if (localStorage.getItem('lesson_day01_complete') === 'true') {
+                const btn = document.querySelector('button[onclick="markComplete()"]');
+                if (btn) {
+                    btn.textContent = '✅ تکمیل شده';
+                    btn.disabled = true;
+                    btn.style.background = '#10b981';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
