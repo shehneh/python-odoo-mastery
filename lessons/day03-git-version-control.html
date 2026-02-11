@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>روز 3: Git & Version Control | Python & Odoo Mastery 🎓</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="lesson-content" style="max-width: 900px; margin: 2rem auto; padding: 0 2rem;">
+        <h1 style="text-align: center; color: #1f2937;">🌳 روز 3: Git & Version Control حرفه‌ای</h1>
+        
+        <div style="background: #d1fae5; border-right: 4px solid #10b981; padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
+            <h3>🎯 چرا Git حیاتی است؟</h3>
+            <p>Git تنها یک ابزار backup نیست - این یک time machine برای کد شماست. توانایی:</p>
+            <ul>
+                <li>بازگشت به هر نقطه از تاریخچه پروژه</li>
+                <li>همکاری با تیم بدون conflict</li>
+                <li>آزمایش ایده‌های جدید با branch</li>
+                <li>نگهداری portfolio حرفه‌ای در GitHub</li>
+            </ul>
+        </div>
+
+        <h2>📚 مفاهیم پایه Git</h2>
+        
+        <div style="background: #f8fafc; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border: 2px solid #e2e8f0;">
+            <h3>1️⃣ Repository (مخزن)</h3>
+            <p>پوشه‌ای که Git تمام تاریخچه تغییرات را در آن نگه می‌دارد.</p>
+            <div style="background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; font-family: 'Fira Code', monospace; margin: 1rem 0; direction: ltr; text-align: left;">
+<span style="color: #94a3b8;"># ساخت repository جدید</span>
+git init
+
+<span style="color: #94a3b8;"># کلون کردن repository موجود</span>
+git clone https://github.com/username/repo.git
+            </div>
+        </div>
+
+        <div style="background: #f8fafc; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border: 2px solid #e2e8f0;">
+            <h3>2️⃣ Staging Area</h3>
+            <p>محلی که فایل‌ها را قبل از commit آماده می‌کنید.</p>
+            <div style="background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; font-family: 'Fira Code', monospace; margin: 1rem 0; direction: ltr; text-align: left;">
+<span style="color: #94a3b8;"># اضافه کردن یک فایل</span>
+git add filename.py
+
+<span style="color: #94a3b8;"># اضافه کردن همه فایل‌های تغییر یافته</span>
+git add .
+
+<span style="color: #94a3b8;"># دیدن وضعیت</span>
+git status
+            </div>
+        </div>
+
+        <div style="background: #f8fafc; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border: 2px solid #e2e8f0;">
+            <h3>3️⃣ Commit</h3>
+            <p>ذخیره snapshot از تغییرات با یک پیام توضیحی.</p>
+            <div style="background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; font-family: 'Fira Code', monospace; margin: 1rem 0; direction: ltr; text-align: left;">
+<span style="color: #94a3b8;"># commit با پیام</span>
+git commit -m "Add user authentication feature"
+
+<span style="color: #94a3b8;"># commit همراه با add</span>
+git commit -am "Fix login bug"
+
+<span style="color: #94a3b8;"># دیدن تاریخچه commit‌ها</span>
+git log
+git log --oneline
+            </div>
+        </div>
+
+        <h2>🌿 Branch - شاخه‌سازی</h2>
+        
+        <div style="background: #fef3c7; border-right: 4px solid #f59e0b; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+            <h3>⚠️ چرا Branch استفاده کنیم؟</h3>
+            <p>
+                Branch به شما اجازه می‌دهد روی یک feature جدید کار کنید بدون اینکه کد اصلی را خراب کنید.
+                مثل داشتن چند نسخه موازی از پروژه.
+            </p>
+        </div>
+
+        <div style="background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; font-family: 'Fira Code', monospace; margin: 1rem 0; direction: ltr; text-align: left;">
+<span style="color: #94a3b8;"># لیست branch‌ها</span>
+git branch
+
+<span style="color: #94a3b8;"># ساخت branch جدید</span>
+git branch feature-backup
+
+<span style="color: #94a3b8;"># رفتن به branch دیگر</span>
+git checkout feature-backup
+
+<span style="color: #94a3b8;"># ساخت و رفتن به branch جدید (shortcut)</span>
+git checkout -b feature-notifications
+
+<span style="color: #94a3b8;"># merge کردن branch به main</span>
+git checkout main
+git merge feature-backup
+
+<span style="color: #94a3b8;"># حذف branch</span>
+git branch -d feature-backup
+        </div>
+
+        <h2>🔄 کار با Remote Repository (GitHub)</h2>
+
+        <div style="background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; font-family: 'Fira Code', monospace; margin: 1rem 0; direction: ltr; text-align: left;">
+<span style="color: #94a3b8;"># دیدن remote repositories</span>
+git remote -v
+
+<span style="color: #94a3b8;"># اضافه کردن remote</span>
+git remote add origin https://github.com/username/repo.git
+
+<span style="color: #94a3b8;"># push کردن به GitHub</span>
+git push origin main
+
+<span style="color: #94a3b8;"># pull کردن تغییرات جدید</span>
+git pull origin main
+
+<span style="color: #94a3b8;"># fetch (بدون merge)</span>
+git fetch origin
+        </div>
+
+        <h2>🛠️ Workflow عملی برای پروژه Odoo</h2>
+
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+            <h3>📝 سناریو واقعی:</h3>
+            <p>می‌خواهید یک feature جدید برای ماژول backup اضافه کنید:</p>
+            
+            <div style="background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 8px; margin: 1rem 0; font-family: 'Fira Code', monospace;">
+<span style="color: #94a3b8;"># 1. مطمئن شوید روی main هستید و updated است</span>
+git checkout main
+git pull origin main
+
+<span style="color: #94a3b8;"># 2. branch جدید برای feature بسازید</span>
+git checkout -b feature-email-notifications
+
+<span style="color: #94a3b8;"># 3. کدنویسی کنید و تست کنید...</span>
+
+<span style="color: #94a3b8;"># 4. تغییرات را add کنید</span>
+git add models/backup_config.py
+git add views/backup_views.xml
+
+<span style="color: #94a3b8;"># 5. commit با پیام واضح</span>
+git commit -m "Add email notification for backup completion"
+
+<span style="color: #94a3b8;"># 6. push به GitHub</span>
+git push origin feature-email-notifications
+
+<span style="color: #94a3b8;"># 7. در GitHub یک Pull Request ایجاد کنید</span>
+<span style="color: #94a3b8;"># 8. بعد از approve، merge کنید</span>
+git checkout main
+git merge feature-email-notifications
+git push origin main
+
+<span style="color: #94a3b8;"># 9. branch قدیمی را حذف کنید</span>
+git branch -d feature-email-notifications
+git push origin --delete feature-email-notifications
+            </div>
+        </div>
+
+        <h2>🚨 دستورات مفید برای Troubleshooting</h2>
+
+        <div style="background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; font-family: 'Fira Code', monospace; margin: 1rem 0; direction: ltr; text-align: left;">
+<span style="color: #94a3b8;"># لغو تغییرات یک فایل (before staging)</span>
+git checkout -- filename.py
+
+<span style="color: #94a3b8;"># unstage کردن فایل</span>
+git reset HEAD filename.py
+
+<span style="color: #94a3b8;"># برگشت به commit قبلی (خطرناک!)</span>
+git reset --hard HEAD~1
+
+<span style="color: #94a3b8;"># دیدن تفاوت‌ها</span>
+git diff
+git diff --staged
+
+<span style="color: #94a3b8;"># stash کردن تغییرات موقت</span>
+git stash
+git stash pop
+
+<span style="color: #94a3b8;"># دیدن چه کسی چه خطی را تغییر داده</span>
+git blame filename.py
+        </div>
+
+        <h2>📄 فایل .gitignore</h2>
+
+        <div style="background: #f8fafc; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border: 2px solid #e2e8f0;">
+            <p>فایل‌هایی که نباید commit شوند:</p>
+            <div style="background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; font-family: 'Fira Code', monospace; margin: 1rem 0; direction: ltr; text-align: left;">
+<span style="color: #94a3b8;"># فایل .gitignore برای پروژه Odoo/Python</span>
+
+<span style="color: #60a5fa;"># Python</span>
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+ENV/
+env/
+
+<span style="color: #60a5fa;"># Odoo</span>
+*.pyc
+filestore/
+sessions/
+addons/*/static/description/icon.png.backup
+
+<span style="color: #60a5fa;"># Database</span>
+*.sql
+*.dump
+
+<span style="color: #60a5fa;"># IDE</span>
+.vscode/
+.idea/
+*.swp
+*.swo
+
+<span style="color: #60a5fa;"># رمزها و کانفیگ</span>
+*.conf
+.env
+ODOO_PASSWORDS.txt
+
+<span style="color: #60a5fa;"># Logs</span>
+*.log
+            </div>
+        </div>
+
+        <h2>🧪 تمرین عملی</h2>
+
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+            <h3>تمرین: مدیریت یک پروژه واقعی</h3>
+            <ol style="line-height: 2;">
+                <li>یک repository جدید در GitHub بسازید به نام "odoo-learning"</li>
+                <li>یک فایل README.md بسازید و commit کنید</li>
+                <li>یک branch به نام "feature-first-module" بسازید</li>
+                <li>یک فایل Python ساده بسازید و commit کنید</li>
+                <li>تغییرات را به GitHub push کنید</li>
+                <li>branch را به main merge کنید</li>
+            </ol>
+            
+            <button onclick="document.getElementById('ex-solution').style.display='block'" style="background: white; color: #667eea; padding: 0.75rem 1.5rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 1rem;">
+                💡 مشاهده راه‌حل کامل
+            </button>
+            
+            <div id="ex-solution" style="display: none; background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 8px; margin-top: 1rem; font-family: 'Fira Code', monospace;">
+<span style="color: #94a3b8;"># 1. ساخت پوشه و مقداردهی git</span>
+mkdir odoo-learning
+cd odoo-learning
+git init
+
+<span style="color: #94a3b8;"># 2. ساخت README</span>
+echo "# Odoo Learning Project" > README.md
+git add README.md
+git commit -m "Initial commit with README"
+
+<span style="color: #94a3b8;"># 3. اضافه کردن remote (آدرس از GitHub بگیرید)</span>
+git remote add origin https://github.com/username/odoo-learning.git
+git push -u origin main
+
+<span style="color: #94a3b8;"># 4. ساخت branch جدید</span>
+git checkout -b feature-first-module
+
+<span style="color: #94a3b8;"># 5. ساخت فایل Python</span>
+echo "print('Hello Odoo!')" > hello.py
+git add hello.py
+git commit -m "Add first Python file"
+git push origin feature-first-module
+
+<span style="color: #94a3b8;"># 6. merge به main</span>
+git checkout main
+git merge feature-first-module
+git push origin main
+
+<span style="color: #94a3b8;"># 7. پاک کردن branch</span>
+git branch -d feature-first-module
+git push origin --delete feature-first-module
+            </div>
+        </div>
+
+        <h2>📝 آزمون</h2>
+
+        <div style="background: #f8fafc; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border: 2px solid #e2e8f0;">
+            <h3>سؤال 1: دستور git add . چه کاری انجام می‌دهد؟</h3>
+            <div class="quiz-option" onclick="checkAnswer(1, 'A', false)" style="background: white; padding: 1rem; margin: 0.5rem 0; border-radius: 8px; cursor: pointer; border: 2px solid transparent;">
+                A) همه فایل‌ها را commit می‌کند
+            </div>
+            <div class="quiz-option" onclick="checkAnswer(1, 'B', true)" style="background: white; padding: 1rem; margin: 0.5rem 0; border-radius: 8px; cursor: pointer; border: 2px solid transparent;">
+                B) همه فایل‌های تغییر یافته را به staging area اضافه می‌کند
+            </div>
+            <div class="quiz-option" onclick="checkAnswer(1, 'C', false)" style="background: white; padding: 1rem; margin: 0.5rem 0; border-radius: 8px; cursor: pointer; border: 2px solid transparent;">
+                C) همه فایل‌ها را حذف می‌کند
+            </div>
+        </div>
+
+        <div style="background: #f8fafc; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border: 2px solid #e2e8f0;">
+            <h3>سؤال 2: چطور یک branch جدید می‌سازیم و به آن می‌رویم؟</h3>
+            <div class="quiz-option" onclick="checkAnswer(2, 'A', true)" style="background: white; padding: 1rem; margin: 0.5rem 0; border-radius: 8px; cursor: pointer; border: 2px solid transparent;">
+                A) git checkout -b branch-name
+            </div>
+            <div class="quiz-option" onclick="checkAnswer(2, 'B', false)" style="background: white; padding: 1rem; margin: 0.5rem 0; border-radius: 8px; cursor: pointer; border: 2px solid transparent;">
+                B) git branch new branch-name
+            </div>
+            <div class="quiz-option" onclick="checkAnswer(2, 'C', false)" style="background: white; padding: 1rem; margin: 0.5rem 0; border-radius: 8px; cursor: pointer; border: 2px solid transparent;">
+                C) git create branch-name
+            </div>
+        </div>
+
+        <button onclick="markComplete()" style="background: #3b82f6; color: white; padding: 1rem 2rem; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; width: 100%; margin: 1.5rem 0;">
+            ✅ تکمیل کردن روز 3
+        </button>
+
+        <div style="display: flex; justify-content: space-between; margin: 3rem 0; gap: 1rem;">
+            <a href="day02-powershell-essentials.html" style="padding: 1rem 2rem; background: #e2e8f0; color: #1f2937; text-decoration: none; border-radius: 8px; font-weight: 600;">← روز قبل</a>
+            <a href="../index.html" style="padding: 1rem 2rem; background: #3b82f6; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">صفحه اصلی →</a>
+        </div>
+    </div>
+
+    <script>
+        const answers = {};
+        const correctAnswers = {1: 'B', 2: 'A'};
+
+        function checkAnswer(q, selected, isCorrect) {
+            const options = event.target.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.style.background = 'white';
+                opt.style.borderColor = 'transparent';
+            });
+            
+            answers[q] = selected;
+            
+            if (selected === correctAnswers[q]) {
+                event.target.style.background = '#d1fae5';
+                event.target.style.borderColor = '#10b981';
+            } else {
+                event.target.style.background = '#fee2e2';
+                event.target.style.borderColor = '#ef4444';
+                options.forEach(opt => {
+                    if (opt.textContent.trim().startsWith(correctAnswers[q])) {
+                        opt.style.background = '#d1fae5';
+                        opt.style.borderColor = '#10b981';
+                    }
+                });
+            }
+        }
+
+        function markComplete() {
+            localStorage.setItem('lesson_day03_complete', 'true');
+            alert('🎉 تبریک! روز 3 تکمیل شد.');
+            event.target.textContent = '✅ تکمیل شده';
+            event.target.disabled = true;
+            event.target.style.background = '#10b981';
+        }
+
+        window.addEventListener('load', () => {
+            if (localStorage.getItem('lesson_day03_complete') === 'true') {
+                const btn = document.querySelector('button[onclick="markComplete()"]');
+                if (btn) {
+                    btn.textContent = '✅ تکمیل شده';
+                    btn.disabled = true;
+                    btn.style.background = '#10b981';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
