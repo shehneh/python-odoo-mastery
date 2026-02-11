@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>روز 2: اصول PowerShell | Python & Odoo Mastery 🎓</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-left: 4px solid #3b82f6;
+            direction: ltr;
+            text-align: left;
+        }
+        .code-block .comment {
+            color: #94a3b8;
+        }
+        .code-block .command {
+            color: #60a5fa;
+        }
+        .code-block .output {
+            color: #34d399;
+        }
+        .code-block .error {
+            color: #f87171;
+        }
+        .warning-box {
+            background: #fef3c7;
+            border-right: 4px solid #f59e0b;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .success-box {
+            background: #d1fae5;
+            border-right: 4px solid #10b981;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .critical-box {
+            background: #fee2e2;
+            border-right: 4px solid #ef4444;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .lesson-content {
+            max-width: 900px;
+            margin: 2rem auto;
+        }
+        .concept-card {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            border: 2px solid #e2e8f0;
+        }
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            margin-left: 0.5rem;
+        }
+        .practice-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+        .quiz-option {
+            background: white;
+            color: #1f2937;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        .quiz-option:hover {
+            border-color: #3b82f6;
+            transform: translateX(-4px);
+        }
+        .quiz-option.correct {
+            background: #d1fae5;
+            border-color: #10b981;
+        }
+        .quiz-option.wrong {
+            background: #fee2e2;
+            border-color: #ef4444;
+        }
+        .quiz-result {
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            display: none;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 3rem 0;
+            gap: 1rem;
+        }
+        .nav-button {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .nav-button.prev {
+            background: #e2e8f0;
+            color: #1f2937;
+        }
+        .nav-button.next {
+            background: #3b82f6;
+            color: white;
+        }
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .pipeline-demo {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-family: 'Fira Code', monospace;
+        }
+        .cmdlet-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            margin: 1rem 0;
+        }
+        .cmdlet-card h4 {
+            color: #3b82f6;
+            margin: 0 0 0.5rem 0;
+            font-family: 'Fira Code', monospace;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: right;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .comparison-table th {
+            background: #3b82f6;
+            color: white;
+            font-weight: 600;
+        }
+        .comparison-table tr:hover {
+            background: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+    <div class="lesson-content">
+        <div style="text-align: center; margin: 2rem 0;">
+            <h1 style="color: #1f2937; font-size: 2.5rem; margin-bottom: 0.5rem;">
+                ⚡ روز 2: اصول PowerShell
+            </h1>
+            <p style="color: #6b7280; font-size: 1.1rem;">
+                Python & Odoo Mastery - مسیر حرفه‌ای شدن
+            </p>
+        </div>
+
+        <div class="success-box">
+            <h3>🎯 هدف این درس</h3>
+            <p>
+                PowerShell یکی از قدرتمندترین ابزارهای Windows است که برای توسعه با Odoo ضروری است.
+                در این درس یاد می‌گیرید چطور از PowerShell برای مدیریت فایل‌ها، اجرای اسکریپت‌ها و 
+                کار با Odoo استفاده کنید.
+            </p>
+        </div>
+
+        <div class="concept-card">
+            <h2>💡 PowerShell چیست؟</h2>
+            <p>
+                PowerShell یک Command-line Shell و زبان اسکریپت‌نویسی است که به شما اجازه می‌دهد:
+            </p>
+            <ul>
+                <li>فایل‌ها و پوشه‌ها را مدیریت کنید</li>
+                <li>پروسه‌ها را کنترل کنید</li>
+                <li>سرویس‌ها را مدیریت کنید</li>
+                <li>دستورات پیچیده را با Pipeline به هم وصل کنید</li>
+                <li>اسکریپت‌های اتوماسیون بنویسید</li>
+            </ul>
+        </div>
+
+        <div class="critical-box">
+            <h3>⚠️ تفاوت مهم: PowerShell vs CMD</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>ویژگی</th>
+                        <th>PowerShell</th>
+                        <th>CMD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>خروجی</td>
+                        <td>Objects (اشیاء)</td>
+                        <td>Text (متن)</td>
+                    </tr>
+                    <tr>
+                        <td>Pipeline</td>
+                        <td><code>|</code> (انتقال objects)</td>
+                        <td><code>|</code> (انتقال text)</td>
+                    </tr>
+                    <tr>
+                        <td>AND operator</td>
+                        <td><code>;</code> (سمیکالن)</td>
+                        <td><code>&&</code></td>
+                    </tr>
+                    <tr>
+                        <td>متغیرها</td>
+                        <td><code>$variable</code></td>
+                        <td><code>%variable%</code></td>
+                    </tr>
+                    <tr>
+                        <td>قدرت</td>
+                        <td>بسیار قدرتمند</td>
+                        <td>محدود</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>📚 دستورات پایه PowerShell</h2>
+
+        <div class="cmdlet-card">
+            <h4>Get-ChildItem (ls, dir)</h4>
+            <p>لیست فایل‌ها و پوشه‌ها</p>
+            <div class="code-block">
+<span class="comment"># لیست کامل فایل‌ها</span>
+Get-ChildItem
+
+<span class="comment"># فقط فایل‌های Python</span>
+Get-ChildItem *.py
+
+<span class="comment"># همه فایل‌ها به صورت بازگشتی</span>
+Get-ChildItem -Recurse
+
+<span class="comment"># به همراه فایل‌های مخفی</span>
+Get-ChildItem -Force
+            </div>
+        </div>
+
+        <div class="cmdlet-card">
+            <h4>Set-Location (cd)</h4>
+            <p>تغییر مسیر فعلی</p>
+            <div class="code-block">
+<span class="comment"># رفتن به پوشه</span>
+Set-Location "D:\business\odoo"
+
+<span class="comment"># استفاده از alias</span>
+cd D:\business\odoo
+
+<span class="comment"># بازگشت به پوشه قبلی</span>
+Set-Location ..
+
+<span class="comment"># رفتن به Home directory</span>
+Set-Location ~
+            </div>
+        </div>
+
+        <div class="cmdlet-card">
+            <h4>Copy-Item (cp, copy)</h4>
+            <p>کپی کردن فایل‌ها</p>
+            <div class="code-block">
+<span class="comment"># کپی یک فایل</span>
+Copy-Item "file.txt" "backup.txt"
+
+<span class="comment"># کپی یک پوشه کامل</span>
+Copy-Item "source\" "destination\" -Recurse
+
+<span class="comment"># کپی با فیلتر</span>
+Copy-Item "*.py" "backup\" -Recurse
+            </div>
+        </div>
+
+        <div class="cmdlet-card">
+            <h4>Remove-Item (rm, del)</h4>
+            <p>حذف فایل‌ها و پوشه‌ها</p>
+            <div class="code-block">
+<span class="comment"># حذف یک فایل</span>
+Remove-Item "file.txt"
+
+<span class="comment"># حذف پوشه و محتویاتش</span>
+Remove-Item "folder\" -Recurse
+
+<span class="comment"># حذف بدون تأیید</span>
+Remove-Item "*.tmp" -Force -Recurse
+            </div>
+        </div>
+
+        <div class="cmdlet-card">
+            <h4>New-Item (mkdir)</h4>
+            <p>ساخت فایل یا پوشه جدید</p>
+            <div class="code-block">
+<span class="comment"># ساخت پوشه</span>
+New-Item -ItemType Directory -Path "new_folder"
+
+<span class="comment"># ساخت فایل خالی</span>
+New-Item -ItemType File -Path "test.py"
+
+<span class="comment"># ساخت با محتوا</span>
+"print('Hello')" | Out-File "script.py"
+            </div>
+        </div>
+
+        <h2>🔗 Pipeline - قدرت واقعی PowerShell</h2>
+
+        <div class="concept-card">
+            <p>
+                Pipeline به شما اجازه می‌دهد خروجی یک دستور را به دستور بعدی بدهید.
+                برخلاف CMD که فقط متن منتقل می‌کند، PowerShell اشیاء (Objects) منتقل می‌کند.
+            </p>
+        </div>
+
+        <div class="pipeline-demo">
+<span class="comment"># پیدا کردن فایل‌های بزرگ Python</span>
+Get-ChildItem *.py -Recurse | Where-Object {$_.Length -gt 1MB} | Sort-Object Length -Descending
+
+<span class="comment"># شمارش تعداد فایل‌های Python</span>
+Get-ChildItem *.py -Recurse | Measure-Object
+
+<span class="comment"># لیست 5 فایل آخر تغییر یافته</span>
+Get-ChildItem | Sort-Object LastWriteTime -Descending | Select-Object -First 5
+        </div>
+
+        <h2>📦 متغیرها در PowerShell</h2>
+
+        <div class="code-block">
+<span class="comment"># تعریف متغیر</span>
+$name = "علی"
+$age = 25
+$isStudent = $true
+
+<span class="comment"># استفاده از متغیر</span>
+Write-Host "نام: $name"
+Write-Host "سن: $age"
+
+<span class="comment"># متغیرهای خاص</span>
+$PWD          <span class="comment"># مسیر فعلی</span>
+$HOME         <span class="comment"># پوشه Home</span>
+$_            <span class="comment"># آیتم فعلی در Pipeline</span>
+$LASTEXITCODE <span class="comment"># کد خروج آخرین دستور</span>
+        </div>
+
+        <h2>🔍 فیلتر کردن با Where-Object</h2>
+
+        <div class="code-block">
+<span class="comment"># فایل‌های بزرگتر از 1MB</span>
+Get-ChildItem | Where-Object {$_.Length -gt 1MB}
+
+<span class="comment"># فایل‌های تغییر یافته امروز</span>
+Get-ChildItem | Where-Object {$_.LastWriteTime -gt (Get-Date).Date}
+
+<span class="comment"># فایل‌های با نام خاص</span>
+Get-ChildItem | Where-Object {$_.Name -like "*test*"}
+        </div>
+
+        <h2>🎯 دستورات مفید برای Odoo</h2>
+
+        <div class="cmdlet-card">
+            <h4>مدیریت Virtual Environment</h4>
+            <div class="code-block">
+<span class="comment"># فعال کردن venv</span>
+& ".\.venv\Scripts\Activate.ps1"
+
+<span class="comment"># نصب پکیج</span>
+pip install odoo
+
+<span class="comment"># لیست پکیج‌ها</span>
+pip list
+
+<span class="comment"># خروج از venv</span>
+deactivate
+            </div>
+        </div>
+
+        <div class="cmdlet-card">
+            <h4>کار با Git</h4>
+            <div class="code-block">
+<span class="comment"># کلون کردن</span>
+git clone https://github.com/username/repo.git
+
+<span class="comment"># وضعیت فایل‌ها</span>
+git status
+
+<span class="comment"># commit کردن</span>
+git add .
+git commit -m "Add new feature"
+
+<span class="comment"># push کردن</span>
+git push origin main
+            </div>
+        </div>
+
+        <div class="cmdlet-card">
+            <h4>کار با SSH</h4>
+            <div class="code-block">
+<span class="comment"># اتصال به سرور</span>
+ssh -p 3031 root@185.255.88.103
+
+<span class="comment"># کپی فایل به سرور</span>
+scp -P 3031 "file.py" root@185.255.88.103:/opt/odoo/
+
+<span class="comment"># اجرای دستور از راه دور</span>
+ssh -p 3031 root@185.255.88.103 "systemctl restart odoo"
+            </div>
+        </div>
+
+        <h2>🧪 تمرین عملی</h2>
+
+        <div class="practice-section">
+            <h3>📝 تمرین 1: مدیریت فایل</h3>
+            <p>یک پوشه به نام "odoo_test" بسازید و موارد زیر را انجام دهید:</p>
+            <ol>
+                <li>سه فایل Python خالی بسازید: app.py, models.py, views.py</li>
+                <li>یک پوشه "backup" بسازید</li>
+                <li>همه فایل‌های .py را به پوشه backup کپی کنید</li>
+                <li>تعداد فایل‌های موجود را بشمارید</li>
+            </ol>
+            
+            <button onclick="showSolution('ex1')" style="background: white; color: #667eea; padding: 0.75rem 1.5rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 1rem;">
+                💡 مشاهده راه‌حل
+            </button>
+            
+            <div id="ex1-solution" class="code-block" style="display: none; margin-top: 1rem;">
+<span class="comment"># ساخت پوشه اصلی</span>
+New-Item -ItemType Directory -Path "odoo_test"
+Set-Location "odoo_test"
+
+<span class="comment"># ساخت فایل‌های Python</span>
+New-Item -ItemType File -Path "app.py"
+New-Item -ItemType File -Path "models.py"
+New-Item -ItemType File -Path "views.py"
+
+<span class="comment"># ساخت پوشه backup</span>
+New-Item -ItemType Directory -Path "backup"
+
+<span class="comment"># کپی فایل‌ها</span>
+Copy-Item "*.py" "backup\"
+
+<span class="comment"># شمارش فایل‌ها</span>
+Get-ChildItem *.py | Measure-Object
+            </div>
+        </div>
+
+        <div class="practice-section">
+            <h3>📝 تمرین 2: Pipeline</h3>
+            <p>با استفاده از Pipeline:</p>
+            <ol>
+                <li>5 فایل آخری که تغییر کرده‌اند را پیدا کنید</li>
+                <li>فقط نام آن‌ها را نمایش دهید</li>
+                <li>آن‌ها را به پوشه "recent" کپی کنید</li>
+            </ol>
+            
+            <button onclick="showSolution('ex2')" style="background: white; color: #667eea; padding: 0.75rem 1.5rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 1rem;">
+                💡 مشاهده راه‌حل
+            </button>
+            
+            <div id="ex2-solution" class="code-block" style="display: none; margin-top: 1rem;">
+<span class="comment"># پیدا کردن و نمایش 5 فایل آخر</span>
+$recentFiles = Get-ChildItem | Sort-Object LastWriteTime -Descending | Select-Object -First 5
+
+<span class="comment"># نمایش فقط نام‌ها</span>
+$recentFiles | Select-Object Name
+
+<span class="comment"># ساخت پوشه و کپی</span>
+New-Item -ItemType Directory -Path "recent" -Force
+$recentFiles | Copy-Item -Destination "recent\"
+            </div>
+        </div>
+
+        <h2>📝 آزمون</h2>
+
+        <div class="concept-card">
+            <h3>سؤال 1: برای اجرای دو دستور به صورت متوالی از چه استفاده می‌کنیم؟</h3>
+            <div class="quiz-option" onclick="checkAnswer(1, 'A', false)">
+                A) مسیر فعلی
+            </div>
+            <div class="quiz-option" onclick="checkAnswer(1, 'B', false)">
+                B) نام کاربری
+            </div>
+            <div class="quiz-option" onclick="checkAnswer(1, 'C', true)">
+                C) شی فعلی در pipeline
+            </div>
+            <div class="quiz-option" onclick="checkAnswer(1, 'D', false)">
+                D) خطای آخرین دستور
+            </div>
+        </div>
+
+        <div class="concept-card">
+            <h3>سؤال 2: کدام دستور برای فیلتر کردن استفاده می‌شود؟</h3>
+            <div class="quiz-option" onclick="checkAnswer(2, 'A', false)">
+                A) Select-Object
+            </div>
+            <div class="quiz-option" onclick="checkAnswer(2, 'B', true)">
+                B) Where-Object
+            </div>
+            <div class="quiz-option" onclick="checkAnswer(2, 'C', false)">
+                C) Sort-Object
+            </div>
+            <div class="quiz-option" onclick="checkAnswer(2, 'D', false)">
+                D) Measure-Object
+            </div>
+        </div>
+
+        <div class="concept-card">
+            <h3>سؤال 3: برای کپی یک پوشه کامل باید از چه parameter استفاده کرد؟</h3>
+            <div class="quiz-option" onclick="checkAnswer(3, 'A', false)">
+                A) -Force
+            </div>
+            <div class="quiz-option" onclick="checkAnswer(3, 'B', true)">
+                B) -Recurse
+            </div>
+            <div class="quiz-option" onclick="checkAnswer(3, 'C', false)">
+                C) -All
+            </div>
+            <div class="quiz-option" onclick="checkAnswer(3, 'D', false)">
+                D) -Deep
+            </div>
+        </div>
+
+        <div class="concept-card">
+            <h3>سؤال 4: $_در PowerShell، به چه معناست؟</h3>
+            <div class="quiz-option" onclick="checkAnswer(4, 'A', false)">
+                A) مسیر فعلی
+            </div>
+            <div class="quiz-option" onclick="checkAnswer(4, 'B', false)">
+                B) نام کاربری
+            </div>
+            <div class="quiz-option" onclick="checkAnswer(4, 'C', true)">
+                C) شی فعلی در pipeline
+            </div>
+            <div class="quiz-option" onclick="checkAnswer(4, 'D', false)">
+                D) خطای آخرین دستور
+            </div>
+        </div>
+
+        <button onclick="checkAllAnswers()" style="background: #3b82f6; color: white; padding: 1rem 2rem; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; width: 100%; margin: 1.5rem 0;">
+            ✅ تکمیل شده - بررسی نتیجه
+        </button>
+
+        <div id="quiz-result" class="quiz-result"></div>
+
+        <div class="nav-buttons">
+            <a href="day01-environment-setup.html" class="nav-button prev">
+                ← بازگشت به صفحه اصلی
+            </a>
+            <button onclick="markComplete()" class="nav-button next">
+                درس بعد: PowerShell Essentials →
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const answers = {};
+        const correctAnswers = {
+            1: 'C',
+            2: 'B',
+            3: 'B',
+            4: 'C'
+        };
+
+        function checkAnswer(questionNum, selected, isCorrect) {
+            // Remove previous selections
+            const options = event.target.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.classList.remove('correct', 'wrong');
+            });
+
+            // Store answer
+            answers[questionNum] = selected;
+
+            // Mark selected
+            if (selected === correctAnswers[questionNum]) {
+                event.target.classList.add('correct');
+            } else {
+                event.target.classList.add('wrong');
+                // Show correct answer
+                options.forEach(opt => {
+                    if (opt.textContent.trim().startsWith(correctAnswers[questionNum])) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+        }
+
+        function checkAllAnswers() {
+            const totalQuestions = Object.keys(correctAnswers).length;
+            let correct = 0;
+
+            for (let q in correctAnswers) {
+                if (answers[q] === correctAnswers[q]) {
+                    correct++;
+                }
+            }
+
+            const result = document.getElementById('quiz-result');
+            result.style.display = 'block';
+
+            if (correct === totalQuestions) {
+                result.style.background = '#d1fae5';
+                result.style.color = '#065f46';
+                result.innerHTML = `
+                    <h3>🎉 عالی!</h3>
+                    <p>شما ${correct} از ${totalQuestions} سؤال را درست پاسخ دادید.</p>
+                    <p>می‌توانید به درس بعد بروید!</p>
+                `;
+            } else if (correct >= totalQuestions * 0.7) {
+                result.style.background = '#fef3c7';
+                result.style.color = '#78350f';
+                result.innerHTML = `
+                    <h3>👍 خوب است!</h3>
+                    <p>شما ${correct} از ${totalQuestions} سؤال را درست پاسخ دادید.</p>
+                    <p>مطالب را مرور کنید و سپس ادامه دهید.</p>
+                `;
+            } else {
+                result.style.background = '#fee2e2';
+                result.style.color = '#7f1d1d';
+                result.innerHTML = `
+                    <h3>📖 نیاز به مرور</h3>
+                    <p>شما ${correct} از ${totalQuestions} سؤال را درست پاسخ دادید.</p>
+                    <p>لطفاً درس را دوباره بخوانید و تمرین عملی را انجام دهید.</p>
+                `;
+            }
+        }
+
+        function showSolution(id) {
+            const solution = document.getElementById(id + '-solution');
+            solution.style.display = solution.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function markComplete() {
+            if (confirm('آیا تمرین عملی را انجام داده و مطمئن هستید که آماده روز بعد هستید؟')) {
+                // Save locally
+                localStorage.setItem('lesson_day02_complete', 'true');
+                localStorage.setItem('lesson_day02_date', new Date().toISOString());
+                
+                alert('🎉 تبریک! روز 2 تکمیل شد. فردا روز 3 را شروع کنید.');
+                
+                // Update UI
+                const btn = event.target;
+                btn.textContent = '✅ تکمیل شده';
+                btn.disabled = true;
+                btn.style.background = '#10b981';
+            }
+        }
+
+        // Check if already completed
+        window.addEventListener('load', () => {
+            if (localStorage.getItem('lesson_day02_complete') === 'true') {
+                const btn = document.querySelector('button[onclick="markComplete()"]');
+                if (btn) {
+                    btn.textContent = '✅ تکمیل شده';
+                    btn.disabled = true;
+                    btn.style.background = '#10b981';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
