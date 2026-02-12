@@ -42,6 +42,50 @@ function setupEventListeners() {
     document.querySelectorAll('.skill-check').forEach(checkbox => {
         checkbox.addEventListener('change', saveProgress);
     });
+    
+    // Make lesson items clickable
+    setupLessonLinks();
+}
+
+// Setup clickable lesson links
+function setupLessonLinks() {
+    // Lesson mapping: lesson number to HTML file
+    const lessonFiles = {
+        1: 'day01-environment-setup.html',
+        2: 'day02-powershell-essentials.html',
+        3: 'day03-git-version-control.html',
+        4: 'day04-debugging-workflow.html',
+        5: 'day05-python-data-types.html',
+        6: 'day06-string-manipulation.html',
+        7: 'day07-collections.html',
+        8: 'day08-functions-scope.html',
+        9: 'day09-file-io.html',
+        10: 'day10-exception-handling.html'
+    };
+    
+    document.querySelectorAll('.lesson-item').forEach(item => {
+        const numberSpan = item.querySelector('.lesson-number');
+        if (!numberSpan) return;
+        
+        const lessonNum = parseInt(numberSpan.textContent);
+        if (lessonFiles[lessonNum]) {
+            // Make it clickable
+            item.style.cursor = 'pointer';
+            item.addEventListener('click', () => {
+                window.location.href = `lessons/${lessonFiles[lessonNum]}`;
+            });
+            
+            // Add hover effect inline
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'translateX(-4px)';
+                item.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+            });
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = '';
+                item.style.boxShadow = '';
+            });
+        }
+    });
 }
 
 // Calculate user level based on skills
